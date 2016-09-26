@@ -65,10 +65,10 @@ public class GA {
 	}
 
 	public String crossover(String individual1, String individual2, int crossoverPoint) {
-		String newGene1 = null;
-		String newGene2 = null;
+		String newChromo1 = null;
+		String newChromo2 = null;
 
-		System.out.println("Single genes:");
+		System.out.println("Single chromosomes:");
 		System.out.println(individual1);
 		System.out.println(individual2);
 
@@ -77,14 +77,14 @@ public class GA {
 		String indi2Part1 = individual2.substring(0, crossoverPoint);
 		String indi2Part2 = individual2.substring(crossoverPoint, individual2.length());
 
-		newGene1 = indi1Part1 + indi2Part2;
-		newGene2 = indi2Part1 + indi1Part2;
+		newChromo1 = indi1Part1 + indi2Part2;
+		newChromo2 = indi2Part1 + indi1Part2;
 
-		System.out.println("crossed over genes: ");
-		System.out.println(newGene1);
-		System.out.println(newGene2);
+		System.out.println("crossed over chromosomes: ");
+		System.out.println(newChromo1);
+		System.out.println(newChromo2);
 
-		return newGene1;
+		return newChromo1;
 	}
 
 	public static void main(String[] args) {
