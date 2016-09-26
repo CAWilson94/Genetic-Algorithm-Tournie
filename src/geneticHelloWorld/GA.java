@@ -73,14 +73,14 @@ public class GA {
 	 * @return
 	 */
 	public String mutate(String individual) {
-
 		char[] indi = individual.toCharArray();
 		Random r = new Random();
+		
 		int randChar = r.nextInt(indi.length);
-
+		
 		indi[randChar] += r.nextInt((1 - 0) + 1) + 0;
 		String indiStr = String.valueOf(indi);
-
+		
 		return indiStr;
 	}
 
@@ -98,6 +98,13 @@ public class GA {
 		System.out.println(randChar);
 		System.out.println(boop);
 		System.out.println(mut);
+	}
+	
+	/**
+	 * Select the chromosomes that are the fittest
+	 */
+	public void selection(){
+		
 	}
 
 	/**
