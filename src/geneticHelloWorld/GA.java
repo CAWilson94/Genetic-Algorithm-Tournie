@@ -41,6 +41,13 @@ public class GA {
 		return populationFitness;
 	}
 
+	/**
+	 * Calculate fitness of an individual chromosome
+	 * 
+	 * @param individual
+	 * @param target
+	 * @return
+	 */
 	public int individualFitness(String individual, String target) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
@@ -48,12 +55,23 @@ public class GA {
 		return individualFitness;
 	}
 
+	/**
+	 * Show every chromosome in a population
+	 * 
+	 * @param population
+	 */
 	public void showPopulation(List<String> population) {
 		for (String P : population) {
 			System.out.println(P);
 		}
 	}
 
+	/**
+	 * Mutate a random gene in a chromosome
+	 * 
+	 * @param individual
+	 * @return
+	 */
 	public String mutate(String individual) {
 
 		char[] indi = individual.toCharArray();
@@ -66,6 +84,30 @@ public class GA {
 		return indiStr;
 	}
 
+	/**
+	 * Mutate one random chromosome in the population
+	 * 
+	 * @param mutationChance
+	 * @param population
+	 */
+	public void mutateRandString(int mutationChance, List<String> population) {
+		Random r = new Random();
+		int randChar = r.nextInt(population.size());
+		String boop = population.get(randChar);
+		String mut = mutate(boop);
+		System.out.println(randChar);
+		System.out.println(boop);
+		System.out.println(mut);
+	}
+
+	/**
+	 * Crossover two given chromosomes
+	 * 
+	 * @param individual1
+	 * @param individual2
+	 * @param crossoverPoint
+	 * @return List<String> new chromosomes
+	 */
 	public List<String> crossover(String individual1, String individual2, int crossoverPoint) {
 		List<String> newChromosomes = new ArrayList<String>();
 		String newChromo1 = null;
@@ -78,14 +120,13 @@ public class GA {
 
 		newChromo1 = indi1Part1 + indi2Part2;
 		newChromo2 = indi2Part1 + indi1Part2;
-		
+
 		newChromosomes.addAll(Arrays.asList(newChromo1, newChromo2));
 
 		return newChromosomes;
 	}
 
 	public static void main(String[] args) {
-
 		String target = "hello, world!";
 
 		// Step 1: create random population
@@ -100,6 +141,7 @@ public class GA {
 
 		// Lets evaluate the fitness of one individual
 		String boop = "hello, world!";
+
 		System.out.println(ga.individualFitness(boop, target));
 
 		// Lets mutate one of th eindividuals
@@ -108,9 +150,13 @@ public class GA {
 
 		// Lets try crossing over two strings
 		List<String> newPop = ga.crossover(population.get(5), population.get(6), 5);
-		for(String x: newPop){
+		for (String x : newPop) {
 			System.out.println(x);
 		}
 
+		// Now lets mutate one of the chromosomes in our population
+		
+		ga.mutateRandString(2, population);
+		
 	}
 }
