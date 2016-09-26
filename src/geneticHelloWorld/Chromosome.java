@@ -18,9 +18,4 @@ public class Chromosome {
 		return chromosome;
 	}
 
-	public static void main(String[] args) {
-		Chromosome c = new Chromosome();
-		System.out.println(c.randomChromosome());
-	}
-
 }

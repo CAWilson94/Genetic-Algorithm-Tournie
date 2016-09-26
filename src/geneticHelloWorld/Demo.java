@@ -27,39 +27,6 @@ public class Demo {
 		return population;
 	}
 
-	public int fitnessFunction(String individual, String target) {
-
-		int fitness = 0;
-		char[] indi = individual.toCharArray();
-		char[] targ = target.toCharArray();
-
-		for (int i = 0; i < indi.length; i++) {
-			int indiInt = Math.abs((Character.getNumericValue(indi[i])));
-			int targInt = Math.abs((Character.getNumericValue(targ[i])));
-
-			int currentFitness = Math.abs(indiInt - targInt);
-			fitness += currentFitness;
-			// System.out.println(currentFitness + " of " + (indi[i]) + " " +
-			// indiInt + " and " + (targ[i]) + " " + targInt);
-		}
-		return fitness;
-	}
-
-	public int fitnessHamming(String individual, String target) {
-
-		int hammingFitness = 0;
-
-		char[] indi = individual.toCharArray();
-		char[] targ = target.toCharArray();
-
-		for (int i = 0; i < indi.length; i++) {
-			if (targ[i] != indi[i]) {
-				hammingFitness++;
-			}
-		}
-		return hammingFitness;
-	}
-
 	/*
 	 * Mutates an individual by incrementing a random value in the string by 1,
 	 * or leaving it alone.
@@ -100,7 +67,8 @@ public class Demo {
 		String individual = "hello worlc";
 		String target = "hello world";
 
-		int fitness = ga.fitnessHamming(individual, target);
+		FitnessFunctions fit = new FitnessFunctions();
+		int fitness = fit.fitnessHamming(individual, target);
 
 		final long startTime = System.currentTimeMillis();
 		System.out.println("total fitness is: " + fitness);

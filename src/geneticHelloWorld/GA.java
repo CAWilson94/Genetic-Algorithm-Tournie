@@ -30,26 +30,42 @@ public class GA {
 	 */
 	public int populationFitness(String target, List<String> population) {
 		int populationFitness = 0;
-		FitnessFunctions fit = new FitnessFunctions();
 		for (String p : population) {
-			if (!target.equals(p)) {
-				populationFitness += fit.fitnessHamming(p, target);
-			}
+			populationFitness += individualFitness(p, target);
 		}
 		return populationFitness;
+	}
+
+	public int individualFitness(String individual, String target) {
+		int individualFitness = 0;
+		FitnessFunctions fit = new FitnessFunctions();
+		individualFitness = fit.fitnessHamming(individual, target);
+		return individualFitness;
+	}
+	
+	public void showPopulation(List<String> population){
+		for(String P: population){
+			System.out.println(P);
+		}
 	}
 
 	public static void main(String[] args) {
 
 		String target = "hello, world!";
-		
-		// Step 1
+
+		// Step 1: create random population
 		Population p = new Population();
 		GA ga = new GA();
 		List<String> population = p.getRandPopulation();
+		// Show whats in this random population
+		ga.showPopulation(population);
 
-		// Step 2
+		// Step 2: evaluate the fitness of each population
 		System.out.println(ga.populationFitness(target, population));
+		
+		// Lets evaluate the fitness of one individual 
+		String boop = "hello, world!";
+		System.out.println(ga.individualFitness(boop, target));
 
 	}
 
