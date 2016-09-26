@@ -1,5 +1,7 @@
 package geneticHelloWorld;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -64,13 +66,10 @@ public class GA {
 		return indiStr;
 	}
 
-	public String crossover(String individual1, String individual2, int crossoverPoint) {
+	public List<String> crossover(String individual1, String individual2, int crossoverPoint) {
+		List<String> newChromosomes = new ArrayList<String>();
 		String newChromo1 = null;
 		String newChromo2 = null;
-
-		System.out.println("Single chromosomes:");
-		System.out.println(individual1);
-		System.out.println(individual2);
 
 		String indi1Part1 = individual1.substring(0, crossoverPoint);
 		String indi1Part2 = individual1.substring(crossoverPoint, individual1.length());
@@ -79,12 +78,10 @@ public class GA {
 
 		newChromo1 = indi1Part1 + indi2Part2;
 		newChromo2 = indi2Part1 + indi1Part2;
+		
+		newChromosomes.addAll(Arrays.asList(newChromo1, newChromo2));
 
-		System.out.println("crossed over chromosomes: ");
-		System.out.println(newChromo1);
-		System.out.println(newChromo2);
-
-		return newChromo1;
+		return newChromosomes;
 	}
 
 	public static void main(String[] args) {
@@ -110,7 +107,10 @@ public class GA {
 		System.out.println(newo);
 
 		// Lets try crossing over two strings
-		ga.crossover(population.get(5), population.get(6), 5);
+		List<String> newPop = ga.crossover(population.get(5), population.get(6), 5);
+		for(String x: newPop){
+			System.out.println(x);
+		}
 
 	}
 }
