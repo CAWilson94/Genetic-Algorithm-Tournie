@@ -1,6 +1,5 @@
 package geneticHelloWorld;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,42 +20,36 @@ public class GA {
 	final String target = "hello, world!";
 
 	/**
-	 * Hamming distance to get fitness
+	 * Evaluates current fitness of the generation
+	 * 
+	 * @param target
+	 *            the target to be evaluated against
+	 * @param population
+	 *            the population of individuals
+	 * @return overall fitness of current population
 	 */
-	public int fitnessCurrent(String target, List<String> population) {
-		// int[] fitnessCurrent;
-		int fitnessCurrent = 0;
-		Demo d = new Demo();
+	public int populationFitness(String target, List<String> population) {
+		int populationFitness = 0;
+		FitnessFunctions fit = new FitnessFunctions();
 		for (String p : population) {
-			/**
-			 * Each position in population has a chromosome full of genes
-			 * Need to see difference between each chromsome and the target
-			 */
 			if (!target.equals(p)) {
-				System.out.println(p + " not the same as " + target);
-				fitnessCurrent = d.fitnessHamming(p,target);
+				populationFitness += fit.fitnessHamming(p, target);
 			}
-			
 		}
-
-		return fitnessCurrent;
+		return populationFitness;
 	}
 
 	public static void main(String[] args) {
 
 		String target = "hello, world!";
+		
 		// Step 1
 		Population p = new Population();
 		GA ga = new GA();
 		List<String> population = p.getRandPopulation();
-		
-		/*for(String p1: population){
-			System.out.println(p1);
-		}
-		 */
-		
+
 		// Step 2
-		System.out.println(ga.fitnessCurrent(target, population));
+		System.out.println(ga.populationFitness(target, population));
 
 	}
 

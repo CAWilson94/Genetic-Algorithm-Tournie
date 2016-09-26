@@ -101,39 +101,36 @@ public class Demo {
 		String target = "hello world";
 
 		int fitness = ga.fitnessHamming(individual, target);
-		
+
 		final long startTime = System.currentTimeMillis();
 		System.out.println("total fitness is: " + fitness);
 		final long endTime = System.currentTimeMillis();
-		System.out.println("Total execution time: " + (endTime - startTime) );
-		
+		System.out.println("Total execution time: " + (endTime - startTime));
 
-		/*int i = 0;
-		while (true) {
-
-			System.out.println("\n\n" + i + " : FITNESS AT THIS: " + fitness + "\n\n");
-
-			i += 1;
-			char[] mutate = ga.mutate(individual);
-
-			String mutateString = String.valueOf(mutate);
-
-			System.out.println(mutateString);
-
-			int fitnessCurrent = ga.fitnessHamming(mutateString, target);
-
-			System.out.println(fitnessCurrent + " cf " + fitness + " fit");
-
-			if (fitnessCurrent < fitness) {
-				individual = mutateString;
-				System.out.println(i + " : " + "current fitness : " + fitnessCurrent + " mutate : " + individual);
-			}
-
-			if (fitnessCurrent == 0 && !individual.contains("!")) {
-				System.out.println(i + " : " + "current fitness : " + fitnessCurrent + " mutate : " + individual);
-				break;
-			}
-		}*/
+		/*
+		 * int i = 0; while (true) {
+		 * 
+		 * System.out.println("\n\n" + i + " : FITNESS AT THIS: " + fitness +
+		 * "\n\n");
+		 * 
+		 * i += 1; char[] mutate = ga.mutate(individual);
+		 * 
+		 * String mutateString = String.valueOf(mutate);
+		 * 
+		 * System.out.println(mutateString);
+		 * 
+		 * int fitnessCurrent = ga.fitnessHamming(mutateString, target);
+		 * 
+		 * System.out.println(fitnessCurrent + " cf " + fitness + " fit");
+		 * 
+		 * if (fitnessCurrent < fitness) { individual = mutateString;
+		 * System.out.println(i + " : " + "current fitness : " + fitnessCurrent
+		 * + " mutate : " + individual); }
+		 * 
+		 * if (fitnessCurrent == 0 && !individual.contains("!")) {
+		 * System.out.println(i + " : " + "current fitness : " + fitnessCurrent
+		 * + " mutate : " + individual); break; } }
+		 */
 	}
 
 }
