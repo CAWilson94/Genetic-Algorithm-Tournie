@@ -45,13 +45,13 @@ public class GA {
 		individualFitness = fit.fitnessHamming(individual, target);
 		return individualFitness;
 	}
-	
-	public void showPopulation(List<String> population){
-		for(String P: population){
+
+	public void showPopulation(List<String> population) {
+		for (String P : population) {
 			System.out.println(P);
 		}
 	}
-	
+
 	public String mutate(String individual) {
 
 		char[] indi = individual.toCharArray();
@@ -60,8 +60,14 @@ public class GA {
 
 		indi[randChar] += r.nextInt((1 - 0) + 1) + 0;
 		String indiStr = String.valueOf(indi);
-		
+
 		return indiStr;
+	}
+	
+	public String crossover(String individual1, String individual2){
+		String newGene = null;
+		
+		return newGene;
 	}
 
 	public static void main(String[] args) {
@@ -77,13 +83,13 @@ public class GA {
 
 		// Step 2: evaluate the fitness of each population
 		System.out.println(ga.populationFitness(target, population));
-		
-		// Lets evaluate the fitness of one individual 
+
+		// Lets evaluate the fitness of one individual
 		String boop = "hello, world!";
 		System.out.println(ga.individualFitness(boop, target));
-		
+
 		// Lets mutate one of th eindividuals
-		String  newo = ga.mutate(boop);
+		String newo = ga.mutate(boop);
 		System.out.println(newo);
 	}
 }
