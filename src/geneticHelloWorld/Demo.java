@@ -55,12 +55,8 @@ public class Demo {
 		for (int i = 0; i < indi.length; i++) {
 			if (targ[i] != indi[i]) {
 				hammingFitness++;
-				//System.out.println("targ: " + targ[i] + " ; " + " indi: " + indi[i]);
 			}
 		}
-		
-		System.out.println(hammingFitness);
-
 		return hammingFitness;
 	}
 

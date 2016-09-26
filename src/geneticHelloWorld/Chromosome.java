@@ -14,7 +14,6 @@ public class Chromosome {
 		for (int i = 0; i < 13; i++) {
 			sb.append(AB.charAt(rnd.nextInt(AB.length())));
 		}
-
 		chromosome = sb.toString();
 		return chromosome;
 	}
