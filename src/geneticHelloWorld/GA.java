@@ -1,6 +1,9 @@
 package geneticHelloWorld;
 
 import java.util.List;
+import java.util.Random;
+
+import org.w3c.dom.events.MutationEvent;
 
 /**
  * 
@@ -48,6 +51,18 @@ public class GA {
 			System.out.println(P);
 		}
 	}
+	
+	public String mutate(String individual) {
+
+		char[] indi = individual.toCharArray();
+		Random r = new Random();
+		int randChar = r.nextInt(indi.length);
+
+		indi[randChar] += r.nextInt((1 - 0) + 1) + 0;
+		String indiStr = String.valueOf(indi);
+		
+		return indiStr;
+	}
 
 	public static void main(String[] args) {
 
@@ -66,7 +81,9 @@ public class GA {
 		// Lets evaluate the fitness of one individual 
 		String boop = "hello, world!";
 		System.out.println(ga.individualFitness(boop, target));
-
+		
+		// Lets mutate one of th eindividuals
+		String  newo = ga.mutate(boop);
+		System.out.println(newo);
 	}
-
 }
