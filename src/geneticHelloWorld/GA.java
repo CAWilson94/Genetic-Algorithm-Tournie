@@ -63,11 +63,28 @@ public class GA {
 
 		return indiStr;
 	}
-	
-	public String crossover(String individual1, String individual2){
-		String newGene = null;
-		
-		return newGene;
+
+	public String crossover(String individual1, String individual2, int crossoverPoint) {
+		String newGene1 = null;
+		String newGene2 = null;
+
+		System.out.println("Single genes:");
+		System.out.println(individual1);
+		System.out.println(individual2);
+
+		String indi1Part1 = individual1.substring(0, crossoverPoint);
+		String indi1Part2 = individual1.substring(crossoverPoint, individual1.length());
+		String indi2Part1 = individual2.substring(0, crossoverPoint);
+		String indi2Part2 = individual2.substring(crossoverPoint, individual2.length());
+
+		newGene1 = indi1Part1 + indi2Part2;
+		newGene2 = indi2Part1 + indi1Part2;
+
+		System.out.println("crossed over genes: ");
+		System.out.println(newGene1);
+		System.out.println(newGene2);
+
+		return newGene1;
 	}
 
 	public static void main(String[] args) {
@@ -91,5 +108,9 @@ public class GA {
 		// Lets mutate one of th eindividuals
 		String newo = ga.mutate(boop);
 		System.out.println(newo);
+
+		// Lets try crossing over two strings
+		ga.crossover(population.get(5), population.get(6), 5);
+
 	}
 }
