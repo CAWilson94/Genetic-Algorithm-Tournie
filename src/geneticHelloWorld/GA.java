@@ -51,7 +51,7 @@ public class GA {
 	public int individualFitness(String individual, String target) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
-		individualFitness = fit.fitnessHamming(individual, target);
+		individualFitness = 13 - fit.fitnessHamming(individual, target);
 		return individualFitness;
 	}
 
@@ -75,12 +75,12 @@ public class GA {
 	public String mutate(String individual) {
 		char[] indi = individual.toCharArray();
 		Random r = new Random();
-		
+
 		int randChar = r.nextInt(indi.length);
-		
+
 		indi[randChar] += r.nextInt((1 - 0) + 1) + 0;
 		String indiStr = String.valueOf(indi);
-		
+
 		return indiStr;
 	}
 
@@ -90,21 +90,24 @@ public class GA {
 	 * @param mutationChance
 	 * @param population
 	 */
-	public void mutateRandString(int mutationChance, List<String> population) {
+	public String mutateRandString(int mutationChance, List<String> population) {
 		Random r = new Random();
 		int randChar = r.nextInt(population.size());
 		String boop = population.get(randChar);
 		String mut = mutate(boop);
-		System.out.println(randChar);
-		System.out.println(boop);
-		System.out.println(mut);
+		return mut;
 	}
-	
+
 	/**
-	 * Select the chromosomes that are the fittest
+	 * 
+	 * @return int survivalChance
 	 */
-	public void selection(){
-		
+	public double calcSurvivalChance(int fitnessValue, int totalFitness) {
+		double survival = 0;
+		System.out.println("indi fitness: " + fitnessValue + ":" +  "total: " + totalFitness);
+		survival = Math.round((fitnessValue / (double) totalFitness) * 100);
+		System.out.println("thus, survival is: " + survival);
+		return survival;
 	}
 
 	/**
@@ -144,26 +147,13 @@ public class GA {
 		ga.showPopulation(population);
 
 		// Step 2: evaluate the fitness of each population
-		System.out.println(ga.populationFitness(target, population));
 
-		// Lets evaluate the fitness of one individual
-		String boop = "hello, world!";
+		int popFitness = ga.populationFitness(target, population);
+		System.out.println("population fitness: " + popFitness);
 
-		System.out.println(ga.individualFitness(boop, target));
-
-		// Lets mutate one of th eindividuals
-		String newo = ga.mutate(boop);
-		System.out.println(newo);
-
-		// Lets try crossing over two strings
-		List<String> newPop = ga.crossover(population.get(5), population.get(6), 5);
-		for (String x : newPop) {
-			System.out.println(x);
+		for (String l : population) {
+			int fitness = ga.individualFitness(l, target);
+			ga.calcSurvivalChance(fitness, popFitness);
 		}
-
-		// Now lets mutate one of the chromosomes in our population
-		
-		ga.mutateRandString(2, population);
-		
 	}
 }

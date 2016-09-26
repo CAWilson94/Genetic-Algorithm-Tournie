@@ -34,5 +34,4 @@ public class FitnessFunctions {
 		}
 		return fitness;
 	}
-
 }

@@ -3,8 +3,10 @@ package geneticHelloWorld;
 import java.util.Random;
 
 public class Chromosome {
-	
+
 	final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz,./<>?!£$%^&*()_+-=[];#{}:@~'";
+	final String target = "Hello, World!";
+
 	Random rnd = new Random();
 
 	public String randomChromosome() {
@@ -17,5 +19,4 @@ public class Chromosome {
 		chromosome = sb.toString();
 		return chromosome;
 	}
-
 }

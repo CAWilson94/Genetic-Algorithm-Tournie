@@ -15,5 +15,12 @@ public class Population {
 		}
 		return population;
 	}
+	
+	public static void main(String[] args){
+		Population p = new Population();
+		for(String ph: p.getRandPopulation()){
+			System.out.println(ph);
+		}
+	}
 
 }
