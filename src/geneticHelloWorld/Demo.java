@@ -43,7 +43,9 @@ public class Demo {
 		// Now have crossover and mutation of second half
 		List<Chromosome> children = ga.children(population);
 		populationSpawn.addAll(children);
-		ga.mutateRandString(5, populationSpawn);
+		double mutationChance = Math.round((1 / (double) populationSpawn.size()) * 100);
+		System.out.println(mutationChance);
+		ga.mutateRandString((int) mutationChance, populationSpawn);
 
 	}
 
