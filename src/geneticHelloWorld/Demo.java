@@ -42,15 +42,8 @@ public class Demo {
 		List<Chromosome> populationSpawn = ga.keepFittest(population);
 		// Now have crossover and mutation of second half
 		List<Chromosome> children = ga.children(population);
-		System.out.println("fitteste");
-		for(Chromosome popi: populationSpawn){
-			System.out.println(popi.getChromoStr());
-		}
-		System.out.println("new generation");
 		populationSpawn.addAll(children);
-		for(Chromosome yermaw: populationSpawn){
-			System.out.println(yermaw.getChromoStr());
-		}
+		ga.mutateRandString(5, populationSpawn);
 
 	}
 

@@ -105,14 +105,17 @@ public class GA {
 	 * Mutate one random chromosome in the population
 	 * 
 	 * @param mutationChance
-	 * @param population
+	 * @param populationSpawn
 	 */
-	public String mutateRandString(int mutationChance, List<String> population) {
-		Random r = new Random();
-		int randChar = r.nextInt(population.size());
-		String boop = population.get(randChar);
-		String mut = mutate(boop);
-		return mut;
+	public void mutateRandString(int mutationChance, List<Chromosome> populationSpawn) {
+		for (int i = 0; i < mutationChance; i++) {
+			Random r = new Random();
+			int randChar = r.nextInt(populationSpawn.size());
+			String boop = populationSpawn.get(randChar).getChromoStr();
+			System.out.println("before mutate: " + boop);
+			boop = mutate(boop);
+			System.out.println("After mutate : " + boop);
+		}
 	}
 
 	/**
