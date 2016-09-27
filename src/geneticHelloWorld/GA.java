@@ -193,27 +193,35 @@ public class GA {
 
 		// Choose random parents
 
+		// Add fittest half of array to new population
 		List<String> populationNew = new ArrayList<String>();
-		int i = 0;
-		Random r = new Random();
-		int randChar = r.nextInt(can.size());
-		int randChar2 = r.nextInt(can.size());
-		while (i < 2) {
-			String randomParent1 = can.get(randChar).getChromosome();
-			System.out.println("randpareent 1: " + randomParent1);
-			String randomParent2 = can.get(randChar2).getChromosome();
-			System.out.println("randparent 2 :" + randomParent2);
-			List<String> popCan = ga.crossover(randomParent1, randomParent2, 4);
-			populationNew.add(popCan.get(0));
-			populationNew.add(popCan.get(1));
-			i++;
+		int half = can.size() / 2;
+		for (int i = can.size() - 1; i >= half; i--) {
+			System.out.println(can.get(i).getfitness());
+			populationNew.add(can.get(i).getChromosome());
 		}
 
-		System.out.println("new generation");
+		System.out.println("fittest half of population");
 
-		for (String newpop : populationNew) {
-			System.out.println(newpop);
+		for (String popu : populationNew) {
+			System.out.println(popu);
 		}
+
+		/*
+		 * int i = 0; Random r = new Random(); int randChar =
+		 * r.nextInt(can.size()); int randChar2 = r.nextInt(can.size()); while
+		 * (i < 2) { String randomParent1 = can.get(randChar).getChromosome();
+		 * System.out.println("randpareent 1: " + randomParent1); String
+		 * randomParent2 = can.get(randChar2).getChromosome();
+		 * System.out.println("randparent 2 :" + randomParent2); List<String>
+		 * popCan = ga.crossover(randomParent1, randomParent2, 4);
+		 * populationNew.add(popCan.get(0)); populationNew.add(popCan.get(1));
+		 * i++; }
+		 * 
+		 * System.out.println("new generation");
+		 * 
+		 * for (String newpop : populationNew) { System.out.println(newpop); }
+		 */
 
 	}
 }
