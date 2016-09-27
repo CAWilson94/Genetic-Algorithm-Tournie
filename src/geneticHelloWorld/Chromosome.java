@@ -7,6 +7,7 @@ public class Chromosome {
 	final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz,./<>?!£$%^&*()_+-=[];#{}:@~'";
 	final String target = "Hello, World!";
 	public int fitness = 0;
+	public String chromoStr = null;
 
 	Random rnd = new Random();
 
@@ -19,6 +20,26 @@ public class Chromosome {
 		}
 		chromosome = sb.toString();
 		return chromosome;
+	}
+
+	public Chromosome randomChromo() {
+		Chromosome chromosome = new Chromosome();
+		StringBuilder sb = new StringBuilder(13);
+
+		for (int i = 0; i < 13; i++) {
+			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+		}
+		chromosome.setChromoStr(sb.toString());
+		return chromosome;
+	}
+
+	public void setChromoStr(String chromoStr) {
+		this.chromoStr = chromoStr;
+	}
+
+	public String getChromoStr() {
+		return chromoStr;
+
 	}
 
 	public int getFitness() {

@@ -26,6 +26,16 @@ public class Population {
 		return population;
 	}
 
+	public List<Chromosome> getRandPopulationChromo(int popSize) {
+		List<Chromosome> population = new ArrayList<Chromosome>();
+		// Not sure if you should really do this...
+		Chromosome c = new Chromosome();
+		for (int i = 0; i < popSize; i++) {
+			population.add(c.randomChromo());
+		}
+		return population;
+	}
+
 	public static void main(String[] args) {
 		Population p = new Population();
 		for (String ph : p.getRandPopulation()) {

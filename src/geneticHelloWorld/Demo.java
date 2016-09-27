@@ -20,16 +20,25 @@ import java.util.List;
  * - the higher the fitness number the less the fit actually is.
  */
 
-
 public class Demo {
-
 
 	public static void main(String[] args) {
 
+		String target = "Hello, World!";
 		Population p = new Population();
-		List<String> population = p.getRandPopulation();
+		// Generate an initial population of chromosomes
+		List<Chromosome> population = p.getRandPopulationChromo(20);
+		// Get the fitness of each
 		GA ga = new GA();
-		
+
+		for (Chromosome chrom : population) {
+			chrom.setFitness(ga.individualFitness(chrom.getChromoStr(), target));
+		}
+
+		for (Chromosome chromo : population) {
+			System.out.println(chromo.getChromoStr() + " : " + chromo.getFitness());
+		}
+
 	}
 
 }
