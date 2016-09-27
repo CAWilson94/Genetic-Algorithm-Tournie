@@ -1,6 +1,5 @@
 package geneticHelloWorld;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -53,7 +52,7 @@ public class Demo {
 		for (Chromosome yer : populationSpawn) {
 			System.out.println(yer.getChromoStr());
 		}
-		//TODO: two children appearing twice
+		// TODO: two children appearing twice
 	}
 
 }
