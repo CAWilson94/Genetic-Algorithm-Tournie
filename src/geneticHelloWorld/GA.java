@@ -2,6 +2,8 @@ package geneticHelloWorld;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -151,6 +153,21 @@ public class GA {
 		return newChromosomes;
 	}
 
+	public List<Candidate> sortbyFitness(List<Candidate> candidates) {
+
+		Comparator<Candidate> comparator = new Comparator<Candidate>() {
+
+			@Override
+			public int compare(Candidate can1, Candidate can2) {
+				return can1.getfitness() - can2.getfitness();
+			}
+		};
+
+		Collections.sort(candidates, comparator);
+
+		return candidates;
+	}
+
 	public static void main(String[] args) {
 		Population p = new Population();
 		GA ga = new GA();
@@ -160,9 +177,42 @@ public class GA {
 
 		// Evaluate the population
 		List<Candidate> can = ga.candidateCreation(pop);
+
 		for (Candidate boop : can) {
-			System.out.println(boop.getChromosome());
-			System.out.println(boop.getfitness());
+			System.out.println(boop.getChromosome() + " : " + boop.getfitness());
+		}
+
+		System.out.println("new list based on fitness");
+
+		// Order the candidates by fitness highest to lowest
+		ga.sortbyFitness(can);
+
+		for (Candidate cans : can) {
+			System.out.println(cans.getChromosome() + " : " + cans.getfitness());
+		}
+
+		// Choose random parents
+
+		List<String> populationNew = new ArrayList<String>();
+		int i = 0;
+		Random r = new Random();
+		int randChar = r.nextInt(can.size());
+		int randChar2 = r.nextInt(can.size());
+		while (i < 2) {
+			String randomParent1 = can.get(randChar).getChromosome();
+			System.out.println("randpareent 1: " + randomParent1);
+			String randomParent2 = can.get(randChar2).getChromosome();
+			System.out.println("randparent 2 :" + randomParent2);
+			List<String> popCan = ga.crossover(randomParent1, randomParent2, 4);
+			populationNew.add(popCan.get(0));
+			populationNew.add(popCan.get(1));
+			i++;
+		}
+
+		System.out.println("new generation");
+
+		for (String newpop : populationNew) {
+			System.out.println(newpop);
 		}
 
 	}
