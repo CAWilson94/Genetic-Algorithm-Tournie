@@ -44,7 +44,7 @@ public class Demo {
 		System.out.println("children");
 		List<Chromosome> children = ga.children(population);
 		for (Chromosome child : children) {
-			System.out.println(child.getChromoStr());
+			System.out.println(child.getChromoStr() );
 		}
 
 	}

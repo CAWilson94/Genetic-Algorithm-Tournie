@@ -146,15 +146,11 @@ public class GA {
 		String indi2Part2 = parent2.getChromoStr().substring(crossoverPoint, parent2.getChromoStr().length());
 		// New children strings for new generation
 		newChromoStr1 = indi1Part1 + indi2Part2;
-		System.out.println("chromo one: " + newChromoStr1);
 		newChromoStr2 = indi2Part1 + indi1Part2;
-		// newChromosomes.addAll(Arrays.asList(newChromo1, newChromo2));
 		Chromosome childOne = new Chromosome(newChromoStr1, 0);
 		Chromosome childTwo = new Chromosome(newChromoStr2, 0);
 		newChromosomes.add(childOne);
 		newChromosomes.add(childTwo);
-		System.out.println("chromo one: " + newChromosomes.get(0).getChromoStr());
-		// Hurrah!
 		return newChromosomes;
 	}
 

@@ -12,7 +12,8 @@ public class Chromosome {
 
 	public Chromosome(String chromoString, int fitness) {
 		fitness = this.fitness; // Defaults at 0
-		chromoString = this.chromoString;
+		this.chromoStr = chromoString;
+		System.out.println(chromoStr);
 	}
 
 	public Chromosome() {
