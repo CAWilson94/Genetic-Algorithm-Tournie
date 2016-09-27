@@ -6,6 +6,7 @@ public class Chromosome {
 
 	final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz,./<>?!£$%^&*()_+-=[];#{}:@~'";
 	final String target = "Hello, World!";
+	public int fitness = 0;
 
 	Random rnd = new Random();
 
@@ -18,5 +19,13 @@ public class Chromosome {
 		}
 		chromosome = sb.toString();
 		return chromosome;
+	}
+
+	public int getFitness() {
+		return fitness;
+	}
+
+	public void setFitness(int fitness) {
+		this.fitness = fitness;
 	}
 }
