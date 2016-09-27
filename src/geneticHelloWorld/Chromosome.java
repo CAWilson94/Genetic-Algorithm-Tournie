@@ -11,7 +11,7 @@ public class Chromosome {
 	String chromoString = null;
 
 	public Chromosome(String chromoString, int fitness) {
-		this.fitness = fitness;  // Defaults at 0
+		this.fitness = fitness; // Defaults at 0
 		this.chromoStr = chromoString;
 	}
 
