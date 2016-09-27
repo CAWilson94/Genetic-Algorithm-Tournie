@@ -34,10 +34,8 @@ public class Demo {
 		for (Chromosome chrom : population) {
 			chrom.setFitness(ga.individualFitness(chrom.getChromoStr(), target));
 		}
-
-		for (Chromosome chromo : population) {
-			System.out.println(chromo.getChromoStr() + " : " + chromo.getFitness());
-		}
+		
+		ga.sortbyFitness(population);
 
 	}
 
