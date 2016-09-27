@@ -42,6 +42,21 @@ public class GA {
 	}
 
 	/**
+	 * Create list of candidates to be evolved
+	 * 
+	 * @param population
+	 * @return List<Candidate> chromosomes to be evolved
+	 */
+	public List<Candidate> candidateCreation(List<String> population) {
+		List<Candidate> candidates = new ArrayList<Candidate>();
+		for (String p : population) {
+			Candidate can = new Candidate(individualFitness(p, target), p);
+			candidates.add(can);
+		}
+		return candidates;
+	}
+
+	/**
 	 * Calculate fitness of an individual chromosome
 	 * 
 	 * @param individual
@@ -104,7 +119,7 @@ public class GA {
 	 */
 	public double calcSurvivalChance(int fitnessValue, int totalFitness) {
 		double survival = 0;
-		System.out.println("indi fitness: " + fitnessValue + ":" +  "total: " + totalFitness);
+		System.out.println("indi fitness: " + fitnessValue + ":" + "total: " + totalFitness);
 		survival = Math.round((fitnessValue / (double) totalFitness) * 100);
 		System.out.println("thus, survival is: " + survival);
 		return survival;
@@ -137,23 +152,18 @@ public class GA {
 	}
 
 	public static void main(String[] args) {
-		String target = "hello, world!";
-
-		// Step 1: create random population
 		Population p = new Population();
 		GA ga = new GA();
-		List<String> population = p.getRandPopulation();
-		// Show whats in this random population
-		ga.showPopulation(population);
+		int populationSize = 20;
+		// Step one: population creation
+		List<String> pop = p.getRandPopulation(populationSize);
 
-		// Step 2: evaluate the fitness of each population
-
-		int popFitness = ga.populationFitness(target, population);
-		System.out.println("population fitness: " + popFitness);
-
-		for (String l : population) {
-			int fitness = ga.individualFitness(l, target);
-			ga.calcSurvivalChance(fitness, popFitness);
+		// Evaluate the population
+		List<Candidate> can = ga.candidateCreation(pop);
+		for (Candidate boop : can) {
+			System.out.println(boop.getChromosome());
+			System.out.println(boop.getfitness());
 		}
+
 	}
 }

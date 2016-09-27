@@ -15,10 +15,20 @@ public class Population {
 		}
 		return population;
 	}
-	
-	public static void main(String[] args){
+
+	public List<String> getRandPopulation(int popSize) {
+		List<String> population = new ArrayList<String>();
+		// Not sure if you should really do this...
+		Chromosome c = new Chromosome();
+		for (int i = 0; i < popSize; i++) {
+			population.add(c.randomChromosome());
+		}
+		return population;
+	}
+
+	public static void main(String[] args) {
 		Population p = new Population();
-		for(String ph: p.getRandPopulation()){
+		for (String ph : p.getRandPopulation()) {
 			System.out.println(ph);
 		}
 	}
