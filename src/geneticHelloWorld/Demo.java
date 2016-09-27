@@ -43,10 +43,19 @@ public class Demo {
 		// Now have crossover and mutation of second half
 		List<Chromosome> children = ga.children(population);
 		populationSpawn.addAll(children);
+		System.out.println("aw the kids");
+		for (Chromosome yer : populationSpawn) {
+			System.out.println(yer.getChromoStr());
+		}
 		double mutationChance = Math.round((1 / (double) populationSpawn.size()) * 100);
-		System.out.println(mutationChance);
 		ga.mutateRandString((int) mutationChance, populationSpawn);
-
+		System.out.println("with mutations");
+		for (Chromosome yer : populationSpawn) {
+			System.out.println(yer.getChromoStr());
+		}
+		/**
+		 * Need to also replace the string in the populationSpawn with the newly mutated string
+		 */
 	}
 
 }
