@@ -89,7 +89,7 @@ public class GA {
 	 * @param individual
 	 * @return
 	 */
-	public String mutate(String individual) {
+	public Chromosome mutate(String individual) {
 		char[] indi = individual.toCharArray();
 		Random r = new Random();
 
@@ -97,8 +97,9 @@ public class GA {
 
 		indi[randChar] += r.nextInt((1 - 0) + 1) + 0;
 		String indiStr = String.valueOf(indi);
+		Chromosome chromo = new Chromosome(indiStr, 0);
 
-		return indiStr;
+		return chromo;
 	}
 
 	/**
@@ -111,10 +112,20 @@ public class GA {
 		for (int i = 0; i < mutationChance; i++) {
 			Random r = new Random();
 			int randChar = r.nextInt(populationSpawn.size());
-			String boop = populationSpawn.get(randChar).getChromoStr();
-			System.out.println("before mutate: " + boop);
-			boop = mutate(boop);
-			System.out.println("After mutate : " + boop);
+			String before = populationSpawn.get(randChar).getChromoStr();
+			System.out.println("some shit here");
+			Chromosome before1 = new Chromosome(before, 0);
+			System.out.println("before mutate: " + before1.getChromoStr());
+			Chromosome boop = mutate(populationSpawn.get(randChar).getChromoStr());
+			populationSpawn.set(randChar, boop);
+			System.out.println("After mutate : " + boop.getChromoStr());
+		}
+
+		System.out.println("new mutates population");
+		int i = 0;
+		for (Chromosome o : populationSpawn) {
+			System.out.println(i + " : " + o.getChromoStr());
+			i++;
 		}
 	}
 

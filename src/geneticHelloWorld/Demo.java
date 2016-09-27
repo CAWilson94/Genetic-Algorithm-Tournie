@@ -53,9 +53,7 @@ public class Demo {
 		for (Chromosome yer : populationSpawn) {
 			System.out.println(yer.getChromoStr());
 		}
-		/**
-		 * Need to also replace the string in the populationSpawn with the newly mutated string
-		 */
+		//TODO: two children appearing twice
 	}
 
 }
