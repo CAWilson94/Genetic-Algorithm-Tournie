@@ -130,86 +130,109 @@ public class GA {
 	/**
 	 * Crossover two given chromosomes
 	 * 
-	 * @param individual1
-	 * @param individual2
+	 * @param parent1.getChromoStr()
+	 * @param parent2
 	 * @param crossoverPoint
 	 * @return List<String> new chromosomes
 	 */
-	public List<String> crossover(String individual1, String individual2, int crossoverPoint) {
-		List<String> newChromosomes = new ArrayList<String>();
-		String newChromo1 = null;
-		String newChromo2 = null;
-
-		String indi1Part1 = individual1.substring(0, crossoverPoint);
-		String indi1Part2 = individual1.substring(crossoverPoint, individual1.length());
-		String indi2Part1 = individual2.substring(0, crossoverPoint);
-		String indi2Part2 = individual2.substring(crossoverPoint, individual2.length());
-
-		newChromo1 = indi1Part1 + indi2Part2;
-		newChromo2 = indi2Part1 + indi1Part2;
-
-		newChromosomes.addAll(Arrays.asList(newChromo1, newChromo2));
-
+	public List<Chromosome> crossover(Chromosome parent1, Chromosome parent2, int crossoverPoint) {
+		List<Chromosome> newChromosomes = new ArrayList<Chromosome>();
+		String newChromoStr1 = null;
+		String newChromoStr2 = null;
+		// Create substrings for crossover
+		String indi1Part1 = parent1.getChromoStr().substring(0, crossoverPoint);
+		String indi1Part2 = parent1.getChromoStr().substring(crossoverPoint, parent1.getChromoStr().length());
+		String indi2Part1 = parent2.getChromoStr().substring(0, crossoverPoint);
+		String indi2Part2 = parent2.getChromoStr().substring(crossoverPoint, parent2.getChromoStr().length());
+		// New children strings for new generation
+		newChromoStr1 = indi1Part1 + indi2Part2;
+		System.out.println("chromo one: " + newChromoStr1);
+		newChromoStr2 = indi2Part1 + indi1Part2;
+		// newChromosomes.addAll(Arrays.asList(newChromo1, newChromo2));
+		Chromosome childOne = new Chromosome(newChromoStr1, 0);
+		Chromosome childTwo = new Chromosome(newChromoStr2, 0);
+		newChromosomes.add(childOne);
+		newChromosomes.add(childTwo);
+		System.out.println("chromo one: " + newChromosomes.get(0).getChromoStr());
+		// Hurrah!
 		return newChromosomes;
 	}
 
-	public List<Candidate> sortbyFitness(List<Candidate> candidates) {
+	public List<Chromosome> sortbyFitness(List<Chromosome> chromosomes) {
 
-		Comparator<Candidate> comparator = new Comparator<Candidate>() {
+		Comparator<Chromosome> comparator = new Comparator<Chromosome>() {
 
 			@Override
-			public int compare(Candidate can1, Candidate can2) {
-				return can1.getfitness() - can2.getfitness();
+			public int compare(Chromosome can1, Chromosome can2) {
+				return can1.getFitness() - can2.getFitness();
 			}
 		};
+		Collections.sort(chromosomes, comparator);
+		return chromosomes;
+	}
 
-		Collections.sort(candidates, comparator);
+	public List<Chromosome> keepFittest(List<Chromosome> population) {
+		// Add fittest half of array to new population
+		List<Chromosome> populationSpawn = new ArrayList<Chromosome>();
+		for (int i = population.size() - 1; i >= (population.size() / 2); i--) {
+			populationSpawn.add(population.get(i));
+		}
+		return populationSpawn;
+	}
 
-		return candidates;
+	public List<Chromosome> iscolateWeakest(List<Chromosome> population) {
+		for (int i = 0; i < population.size() / 2; i++) {
+			population.remove(i);
+		}
+		return population;
+	}
+
+	public List<Chromosome> children(List<Chromosome> population) {
+		List<Chromosome> children = new ArrayList<Chromosome>();
+		// Want to look at second half of arraylist here
+		population = iscolateWeakest(population);
+		while (children.size() < population.size()) {
+			Random rand = new Random();
+			int randomNum = rand.nextInt(population.size());
+			int randomNum1 = rand.nextInt(population.size());
+			Chromosome parent1 = population.get(randomNum);
+			Chromosome parent2 = population.get(randomNum1);
+			List<Chromosome> tempChildren = crossover(parent1, parent2, 4);
+			children.add(tempChildren.get(0));
+			children.add(tempChildren.get(1));
+		}
+		return children;
 	}
 
 	public static void main(String[] args) {
-		Population p = new Population();
-
-		int populationSize = 20;
-		// Step one: population creation
-		List<String> pop = p.getRandPopulation(populationSize);
-		GA ga = new GA();
-		List<Candidate> can = ga.candidateCreation(pop);
-
-		while (true) {
-			// Evaluate the population
-			for (Candidate boop : ga.candidateCreation(pop)) {
-				System.out.println(boop.getChromosome() + " : " + boop.getfitness());
-			}
-
-			System.out.println("new list based on fitness");
-			// Order the candidates by fitness highest to lowest
-			ga.sortbyFitness(can);
-
-			// Add fittest half of array to new population
-			List<String> populationNew = new ArrayList<String>();
-			int half = can.size() / 2;
-			for (int i = can.size() - 1; i >= half; i--) {
-				populationNew.add(can.get(i).getChromosome());
-			}
-			// Now need n = population size/2 parents for new gene pool
-			int canSize = can.size() / 2;
-			for (int i = 0; i < canSize; i++) {
-				Random r = new Random();
-				int rc1 = r.nextInt(canSize);
-				int rc2 = r.nextInt(canSize);
-				String rent1 = can.get(rc1).getChromosome();
-				String rent2 = can.get(rc2).getChromosome();
-				List<String> popCan = ga.crossover(rent1, rent2, 4);
-				populationNew.add(popCan.get(0));
-				populationNew.add(popCan.get(1));
-			}
-			// Currently chooses random population from ALL previous population.
-			// Not
-			// the lower half of the candidates
-			pop = populationNew;
-		}
+		/*
+		 * Population p = new Population();
+		 * 
+		 * int populationSize = 20; // Step one: population creation
+		 * List<String> pop = p.getRandPopulation(populationSize); GA ga = new
+		 * GA(); List<Candidate> can = ga.candidateCreation(pop);
+		 * 
+		 * while (true) { // Evaluate the population for (Candidate boop :
+		 * ga.candidateCreation(pop)) { System.out.println(boop.getChromosome()
+		 * + " : " + boop.getfitness()); }
+		 * 
+		 * System.out.println("new list based on fitness"); // Order the
+		 * candidates by fitness highest to lowest ga.sortbyFitness(can);
+		 * 
+		 * // Add fittest half of array to new population List<String>
+		 * populationNew = new ArrayList<String>(); int half = can.size() / 2;
+		 * for (int i = can.size() - 1; i >= half; i--) {
+		 * populationNew.add(can.get(i).getChromosome()); } // Now need n =
+		 * population size/2 parents for new gene pool int canSize = can.size()
+		 * / 2; for (int i = 0; i < canSize; i++) { Random r = new Random(); int
+		 * rc1 = r.nextInt(canSize); int rc2 = r.nextInt(canSize); String rent1
+		 * = can.get(rc1).getChromosome(); String rent2 =
+		 * can.get(rc2).getChromosome(); List<String> popCan =
+		 * ga.crossover(rent1, rent2, 4); populationNew.add(popCan.get(0));
+		 * populationNew.add(popCan.get(1)); } // Currently chooses random
+		 * population from ALL previous population. // Not // the lower half of
+		 * the candidates pop = populationNew; }
+		 */
 
 	}
 }

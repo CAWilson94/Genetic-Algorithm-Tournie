@@ -1,5 +1,6 @@
 package geneticHelloWorld;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -25,17 +26,26 @@ public class Demo {
 	public static void main(String[] args) {
 
 		String target = "Hello, World!";
+		System.out.println(target);
 		Population p = new Population();
 		// Generate an initial population of chromosomes
 		List<Chromosome> population = p.getRandPopulationChromo(20);
 		// Get the fitness of each
 		GA ga = new GA();
-
+		// Get fitness value for each chromosome in population
 		for (Chromosome chrom : population) {
 			chrom.setFitness(ga.individualFitness(chrom.getChromoStr(), target));
 		}
-		
+		// Sort population by fitness
 		ga.sortbyFitness(population);
+		// Keep the first half of the population
+		List<Chromosome> populationSpawn = ga.keepFittest(population);
+		// Now have crossover and mutation of second half
+		System.out.println("children");
+		List<Chromosome> children = ga.children(population);
+		for (Chromosome child : children) {
+			System.out.println(child.getChromoStr());
+		}
 
 	}
 

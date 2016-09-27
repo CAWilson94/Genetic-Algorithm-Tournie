@@ -8,6 +8,16 @@ public class Chromosome {
 	final String target = "Hello, World!";
 	public int fitness = 0;
 	public String chromoStr = null;
+	String chromoString = null;
+
+	public Chromosome(String chromoString, int fitness) {
+		fitness = this.fitness; // Defaults at 0
+		chromoString = this.chromoString;
+	}
+
+	public Chromosome() {
+		// Basically just want to be able to initalize in whatever way I want..
+	}
 
 	Random rnd = new Random();
 
