@@ -28,7 +28,7 @@ public class Demo {
 		System.out.println(target);
 		Population p = new Population();
 		// Generate an initial population of chromosomes
-		List<Chromosome> population = p.getRandPopulationChromo(20);
+		List<Chromosome> population = p.getRandPopulationChromo(4);
 		// Get the fitness of each
 		GA ga = new GA();
 		// Get fitness value for each chromosome in population
@@ -37,21 +37,45 @@ public class Demo {
 		}
 		// Sort population by fitness
 		ga.sortbyFitness(population);
+		System.out.println("all the population: sorted by fitness");
+		for (Chromosome cp : population) {
+			System.out.println(cp.getFitness() + " : " + cp.getChromoStr());
+		}
 		// Keep the first half of the population
 		List<Chromosome> populationSpawn = ga.keepFittest(population);
+		System.out.println("\n" + "half the population" + "\n");
+		for (Chromosome c : populationSpawn) {
+			System.out.println(c.getFitness() + " : " + c.getChromoStr());
+		}
+
+		// weakest left over
+		System.out.println("\n" + "weakest left over" + "\n");
+		List<Chromosome> leftover = ga.iscolateWeakest(population);
+		for(Chromosome chrom: leftover){
+			System.out.println(chrom.getFitness() + " : " + chrom.getChromoStr());
+		}
 		// Now have crossover and mutation of second half
 		List<Chromosome> children = ga.children(population);
+		System.out.println("\n" + "leftover children" + "\n");
+		for (Chromosome p1 : children) {
+			System.out.println(p1.getFitness() + " : " + p1.getChromoStr());
+		}
+
 		populationSpawn.addAll(children);
-		System.out.println("aw the kids");
+		System.out.println("\n" + "aw the kids" + "\n");
 		for (Chromosome yer : populationSpawn) {
 			System.out.println(yer.getChromoStr());
 		}
-		double mutationChance = Math.round((1 / (double) populationSpawn.size()) * 100);
-		ga.mutateRandString((int) mutationChance, populationSpawn);
-		System.out.println("with mutations");
-		for (Chromosome yer : populationSpawn) {
-			System.out.println(yer.getChromoStr());
-		}
+
+		/*
+		 * double mutationChance = Math.round((1 / (double)
+		 * populationSpawn.size()) * 100); ga.mutateRandString((int)
+		 * mutationChance, populationSpawn);
+		 * 
+		 * System.out.println("with mutations"); for (Chromosome yer :
+		 * populationSpawn) { System.out.println(yer.getChromoStr()); }
+		 */
+
 		// TODO: two children appearing twice
 	}
 

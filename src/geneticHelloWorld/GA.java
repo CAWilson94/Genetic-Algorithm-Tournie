@@ -168,7 +168,13 @@ public class GA {
 		return newChromosomes;
 	}
 
-	public List<Chromosome> sortbyFitness(List<Chromosome> chromosomes) {
+	/**
+	 * Sorts fitness lowest to highest
+	 * 
+	 * @param chromosomes
+	 * @return
+	 */
+	public void sortbyFitness(List<Chromosome> chromosomes) {
 
 		Comparator<Chromosome> comparator = new Comparator<Chromosome>() {
 			@Override
@@ -177,25 +183,44 @@ public class GA {
 			}
 		};
 		Collections.sort(chromosomes, comparator);
-		return chromosomes;
 	}
 
-	public List<Chromosome> keepFittest(List<Chromosome> population) {
-		// Add fittest half of array to new population
-		List<Chromosome> populationSpawn = new ArrayList<Chromosome>();
-		for (int i = population.size() - 1; i >= (population.size() / 2); i--) {
-			populationSpawn.add(population.get(i));
+	/**
+	 * Keeps the fittest half of the population i.e. the end half of the
+	 * arraylist
+	 * 
+	 * @param population
+	 * @return
+	 */
+	public void keepFittest(List<Chromosome> population) {
+
+		int half = population.size()/2;
+		for (int i = 0; i <half ; i++) {
+			System.out.println(population.get(i).getChromoStr());
+			population.remove(i);
 		}
-		return populationSpawn;
 	}
 
+	/**
+	 * Take out the weakest half of the population i.e. lower half of arraylist
+	 * 
+	 * @param population
+	 * @return
+	 */
 	public List<Chromosome> iscolateWeakest(List<Chromosome> population) {
-		for (int i = 0; i < population.size() / 2; i++) {
+		for (int i = population.size() - 1; i < (population.size() / 2); i--) {
+			System.out.println(population.get(i).getChromoStr());
 			population.remove(i);
 		}
 		return population;
 	}
 
+	/**
+	 * Return children, i.e. crossed over lower half of population (weakest)
+	 * 
+	 * @param population
+	 * @return
+	 */
 	public List<Chromosome> children(List<Chromosome> population) {
 		List<Chromosome> children = new ArrayList<Chromosome>();
 		// Want to look at second half of arraylist here
@@ -206,41 +231,31 @@ public class GA {
 			int randomNum1 = rand.nextInt(population.size());
 			Chromosome parent1 = population.get(randomNum);
 			Chromosome parent2 = population.get(randomNum1);
-			List<Chromosome> tempChildren = crossover(parent1, parent2, 4);
+			List<Chromosome> tempChildren = crossover(parent1, parent2, 5);
 			children.add(tempChildren.get(0));
 		}
 		return children;
 	}
 
 	public static void main(String[] args) {
-		/*
-		 * Population p = new Population();
-		 * 
-		 * int populationSize = 20; // Step one: population creation
-		 * List<String> pop = p.getRandPopulation(populationSize); GA ga = new
-		 * GA(); List<Candidate> can = ga.candidateCreation(pop);
-		 * 
-		 * while (true) { // Evaluate the population for (Candidate boop :
-		 * ga.candidateCreation(pop)) { System.out.println(boop.getChromosome()
-		 * + " : " + boop.getfitness()); }
-		 * 
-		 * System.out.println("new list based on fitness"); // Order the
-		 * candidates by fitness highest to lowest ga.sortbyFitness(can);
-		 * 
-		 * // Add fittest half of array to new population List<String>
-		 * populationNew = new ArrayList<String>(); int half = can.size() / 2;
-		 * for (int i = can.size() - 1; i >= half; i--) {
-		 * populationNew.add(can.get(i).getChromosome()); } // Now need n =
-		 * population size/2 parents for new gene pool int canSize = can.size()
-		 * / 2; for (int i = 0; i < canSize; i++) { Random r = new Random(); int
-		 * rc1 = r.nextInt(canSize); int rc2 = r.nextInt(canSize); String rent1
-		 * = can.get(rc1).getChromosome(); String rent2 =
-		 * can.get(rc2).getChromosome(); List<String> popCan =
-		 * ga.crossover(rent1, rent2, 4); populationNew.add(popCan.get(0));
-		 * populationNew.add(popCan.get(1)); } // Currently chooses random
-		 * population from ALL previous population. // Not // the lower half of
-		 * the candidates pop = populationNew; }
-		 */
+		GA ga = new GA();
+		List<Chromosome> population = new ArrayList<Chromosome>();
+		population.add(new Chromosome("bob", 0));
+		population.add(new Chromosome("boop", 1));
+		population.add(new Chromosome("yermaw", 3));
+		population.add(new Chromosome("pebble", 1));
+
+		ga.sortbyFitness(population);
+		for (Chromosome bob : population) {
+			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
+		}
+
+		
+		ga.keepFittest(population);
+		System.out.println("\n" + "fittest" + "\n");
+		for (Chromosome bob : population) {
+			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
+		}
 
 	}
 }
