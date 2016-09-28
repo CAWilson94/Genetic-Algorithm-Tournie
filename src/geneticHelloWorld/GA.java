@@ -171,7 +171,6 @@ public class GA {
 	public List<Chromosome> sortbyFitness(List<Chromosome> chromosomes) {
 
 		Comparator<Chromosome> comparator = new Comparator<Chromosome>() {
-
 			@Override
 			public int compare(Chromosome can1, Chromosome can2) {
 				return can1.getFitness() - can2.getFitness();
@@ -209,7 +208,6 @@ public class GA {
 			Chromosome parent2 = population.get(randomNum1);
 			List<Chromosome> tempChildren = crossover(parent1, parent2, 4);
 			children.add(tempChildren.get(0));
-			children.add(tempChildren.get(1));
 		}
 		return children;
 	}
