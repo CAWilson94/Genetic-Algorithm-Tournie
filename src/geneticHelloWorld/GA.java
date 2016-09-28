@@ -194,8 +194,8 @@ public class GA {
 	 */
 	public void keepFittest(List<Chromosome> population) {
 
-		int half = population.size()/2;
-		for (int i = 0; i <half ; i++) {
+		int half = population.size() / 2;
+		for (int i = 0; i < half; i++) {
 			System.out.println(population.get(i).getChromoStr());
 			population.remove(i);
 		}
@@ -208,8 +208,10 @@ public class GA {
 	 * @return
 	 */
 	public List<Chromosome> iscolateWeakest(List<Chromosome> population) {
-		for (int i = population.size() - 1; i < (population.size() / 2); i--) {
-			System.out.println(population.get(i).getChromoStr());
+		int half = population.size() / 2 - 1;
+		int end = population.size() - 1;
+
+		for (int i = end; i > half; i--) {
 			population.remove(i);
 		}
 		return population;
@@ -250,9 +252,8 @@ public class GA {
 			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
 		}
 
-		
-		ga.keepFittest(population);
-		System.out.println("\n" + "fittest" + "\n");
+		System.out.println("\n" + "weakest" + "\n");
+		ga.iscolateWeakest(population);
 		for (Chromosome bob : population) {
 			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
 		}
