@@ -43,11 +43,9 @@ public class Demo {
 			System.out.println(cp.getFitness() + " : " + cp.getChromoStr());
 		}
 
-		List<Chromosome> toCrossover = new ArrayList<Chromosome>();
-		toCrossover = population;
-		ga.iscolateWeakest(toCrossover);
-		System.out.println("weakest by fitness");
-		for (Chromosome cp : toCrossover) {
+		System.out.println("Dem babbies");
+		ga.children(population);
+		for (Chromosome cp : population) {
 			System.out.println(cp.getFitness() + " : " + cp.getChromoStr());
 		}
 

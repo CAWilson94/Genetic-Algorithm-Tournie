@@ -233,7 +233,7 @@ public class GA {
 			int randomNum1 = rand.nextInt(population.size());
 			Chromosome parent1 = population.get(randomNum);
 			Chromosome parent2 = population.get(randomNum1);
-			List<Chromosome> tempChildren = crossover(parent1, parent2, 5);
+			List<Chromosome> tempChildren = crossover(parent1, parent2, 2);
 			children.add(tempChildren.get(0));
 		}
 		return children;
@@ -252,8 +252,8 @@ public class GA {
 			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
 		}
 
-		System.out.println("\n" + "weakest" + "\n");
-		ga.iscolateWeakest(population);
+		System.out.println("\n" + "mutated weaklings" + "\n");
+		ga.children(population);
 		for (Chromosome bob : population) {
 			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
 		}
