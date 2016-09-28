@@ -11,7 +11,7 @@ public class Population {
 		// Not sure if you should really do this...
 		Chromosome c = new Chromosome();
 		for (int i = 0; i < popSize; i++) {
-			population.add(c.randomChromosome());
+			population.add(c.randomChromoFromNum().getChromoStr());
 		}
 		return population;
 	}
