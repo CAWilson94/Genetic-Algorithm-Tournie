@@ -25,6 +25,7 @@ import org.w3c.dom.events.MutationEvent;
 public class GA {
 
 	final String target = "hello, world!";
+	final int crossoverRate = 7; // Trust the crossover rate
 
 	/**
 	 * Evaluates current fitness of the generation
@@ -41,21 +42,6 @@ public class GA {
 			populationFitness += individualFitness(p, target);
 		}
 		return populationFitness;
-	}
-
-	/**
-	 * Create list of candidates to be evolved
-	 * 
-	 * @param population
-	 * @return List<Candidate> chromosomes to be evolved
-	 */
-	public List<Candidate> candidateCreation(List<String> population) {
-		List<Candidate> candidates = new ArrayList<Candidate>();
-		for (String p : population) {
-			Candidate can = new Candidate(individualFitness(p, target), p);
-			candidates.add(can);
-		}
-		return candidates;
 	}
 
 	/**
@@ -166,6 +152,13 @@ public class GA {
 		newChromosomes.add(childOne);
 		newChromosomes.add(childTwo);
 		return newChromosomes;
+	}
+	
+	/**
+	 * Tournie selection
+	 */
+	public void fightToTheDeath(){
+		
 	}
 
 	/**
