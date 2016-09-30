@@ -170,7 +170,7 @@ public class GA {
 			if (i < crossoverRate) {
 				System.out.println("i less than crossover: " + i);
 				List<Chromosome> newG = crossover(p1, p2, crossoverIndex);
-				newGen.addAll(newG);
+				newGen.addAll(newG); // TODO: fix this shit pls
 			}
 		}
 

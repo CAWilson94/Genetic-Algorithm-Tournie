@@ -28,6 +28,11 @@ public class Demo {
 		GA ga = new GA();
 		ga.GAlgorithm(10);
 
+		/**
+		 * your population seems to generate strings that are the same for the
+		 * whole thing...
+		 */
+
 	}
 
 }
