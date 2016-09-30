@@ -26,39 +26,37 @@ public class Demo {
 	public static void main(String[] args) {
 
 		String target = "Hello, World!";
-		System.out.println(target);
+		Chromosome targ = new Chromosome(target, 13);
 		Population p = new Population();
 		// Generate an initial population of chromosomes
 		List<Chromosome> population = p.getRandPopulationChromo(4);
 		// Get the fitness of each
 		GA ga = new GA();
-		// Get fitness value for each chromosome in population
-		for (Chromosome chrom : population) {
-			chrom.setFitness(ga.individualFitness(chrom.getChromoStr(), target));
-		}
-		// Sort population by fitness
-		ga.sortbyFitness(population);
-		System.out.println("all the population: sorted by fitness");
-		for (Chromosome cp : population) {
-			System.out.println(cp.getFitness() + " : " + cp.getChromoStr());
+
+		while (true) {
+			// Get fitness value for each chromosome in population
+			for (Chromosome chrom : population) {
+				chrom.setFitness(ga.individualFitness(chrom.getChromoStr(), targ.getChromoStr()));
+			}
+			// Sort population by fitness
+			ga.sortbyFitness(population);
+			System.out.println("all the population: sorted by fitness");
+			for (Chromosome cp : population) {
+				System.out.println(cp.getFitness() + " : " + cp.getChromoStr());
+			}
+			System.out.println("\n" + "fight to death" + "\n");
+			ga.fightToTheDeath(population);
+			List<Chromosome> boop = ga.fightToTheDeath(population);
+			for (Chromosome c : boop) {
+				System.out.println(c.getChromoStr());
+			}
+			population = boop;
+			if (population.contains(targ.getChromoStr())) {
+				System.out.println("Yassss");
+				break;
+			}
 		}
 
-		System.out.println("Dem babbies");
-		ga.children(population);
-		for (Chromosome cp : population) {
-			System.out.println(cp.getFitness() + " : " + cp.getChromoStr());
-		}
-
-		/*
-		 * double mutationChance = Math.round((1 / (double)
-		 * populationSpawn.size()) * 100); ga.mutateRandString((int)
-		 * mutationChance, populationSpawn);
-		 * 
-		 * System.out.println("with mutations"); for (Chromosome yer :
-		 * populationSpawn) { System.out.println(yer.getChromoStr()); }
-		 */
-
-		// TODO: two children appearing twice
 	}
 
 }

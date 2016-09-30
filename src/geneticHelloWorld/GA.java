@@ -26,6 +26,7 @@ public class GA {
 
 	public static final String target = "hello, world!";
 	public static final int crossoverRate = 7; // Trust the crossover rate
+	public static final int mutationChance = 1;
 
 	/**
 	 * Evaluates current fitness of the generation
@@ -63,9 +64,9 @@ public class GA {
 	 * 
 	 * @param population
 	 */
-	public void showPopulation(List<String> population) {
-		for (String P : population) {
-			System.out.println(P);
+	public void showPopulation(List<Chromosome> population) {
+		for (Chromosome P : population) {
+			System.out.println(P.getChromoStr() + " : " + P.getFitness());
 		}
 	}
 
@@ -82,6 +83,9 @@ public class GA {
 		int randChar = r.nextInt(indi.length);
 
 		indi[randChar] += r.nextInt((1 - 0) + 1) + 0;
+		if (indi[randChar] == 127) {
+			indi[randChar] = 32;
+		}
 		String indiStr = String.valueOf(indi);
 		Chromosome chromo = new Chromosome(indiStr, 0);
 
@@ -94,25 +98,21 @@ public class GA {
 	 * @param mutationChance
 	 * @param populationSpawn
 	 */
-	public void mutateRandString(int mutationChance, List<Chromosome> populationSpawn) {
-		for (int i = 0; i < mutationChance; i++) {
-			Random r = new Random();
+	public void mutateRandString(List<Chromosome> populationSpawn) {
+		Random r = new Random();
+		int i = r.nextInt(10 - 0 + 1);
+		/**
+		 * find a way to make the character rollover from 127 to 32 instaed of
+		 * going past that
+		 */
+		if (i < mutationChance) {
 			int randChar = r.nextInt(populationSpawn.size());
 			String before = populationSpawn.get(randChar).getChromoStr();
-			System.out.println("some shit here");
 			Chromosome before1 = new Chromosome(before, 0);
-			System.out.println("before mutate: " + before1.getChromoStr());
 			Chromosome boop = mutate(populationSpawn.get(randChar).getChromoStr());
 			populationSpawn.set(randChar, boop);
-			System.out.println("After mutate : " + boop.getChromoStr());
 		}
 
-		System.out.println("new mutates population");
-		int i = 0;
-		for (Chromosome o : populationSpawn) {
-			System.out.println(i + " : " + o.getChromoStr());
-			i++;
-		}
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class GA {
 	/**
 	 * Tournie selection
 	 */
-	public List<Chromosome> fightToTheDeath(List<Chromosome> population) {
+	public List<Chromosome> fightToTheDeath(List<Chromosome> population, int crossoverIndex) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		// for, half the number of the population
 		Random rand = new Random();
@@ -170,7 +170,7 @@ public class GA {
 			int i = rand.nextInt(10 - 0 + 1);
 			if (i < crossoverRate) {
 				System.out.println("i less than crossover: " + i);
-				List<Chromosome> newG = crossover(p1, p2, 2);
+				List<Chromosome> newG = crossover(p1, p2, crossoverIndex);
 				newGen.addAll(newG);
 			}
 		}
@@ -253,13 +253,28 @@ public class GA {
 		GA ga = new GA();
 		List<Chromosome> population = new ArrayList<Chromosome>();
 		population.add(new Chromosome("bob", 0));
-		population.add(new Chromosome("boop", 1));
-		population.add(new Chromosome("yermaw", 3));
-		population.add(new Chromosome("pebble", 1));
+		population.add(new Chromosome("bop", 1));
+		population.add(new Chromosome("yer", 3));
+		population.add(new Chromosome("peb", 1));
 
-		List<Chromosome> boop = ga.fightToTheDeath(population);
-		for (Chromosome c : boop) {
-			System.out.println(c.getChromoStr());
+		ga.mutateRandString(population);
+		ga.showPopulation(population);
+
+		
+		while (true) {
+			ga.showPopulation(population);
+			List<Chromosome> boop = ga.fightToTheDeath(population, 1);
+			ga.showPopulation(boop);
+			System.out.println("\nafter mutating\n");
+			ga.mutateRandString(boop);
+			// population = boop;
+			for (Chromosome p : population) {
+				if (p.getChromoStr().equals("bob")) {
+					System.out.println("yas");
+					return;
+				}
+			} 
 		}
 	}
+
 }
