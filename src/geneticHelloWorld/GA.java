@@ -24,8 +24,8 @@ import org.w3c.dom.events.MutationEvent;
 
 public class GA {
 
-	final String target = "hello, world!";
-	final int crossoverRate = 7; // Trust the crossover rate
+	public static final String target = "hello, world!";
+	public static final int crossoverRate = 7; // Trust the crossover rate
 
 	/**
 	 * Evaluates current fitness of the generation
@@ -153,12 +153,29 @@ public class GA {
 		newChromosomes.add(childTwo);
 		return newChromosomes;
 	}
-	
+
 	/**
 	 * Tournie selection
 	 */
-	public void fightToTheDeath(){
-		
+	public List<Chromosome> fightToTheDeath(List<Chromosome> population) {
+		List<Chromosome> newGen = new ArrayList<Chromosome>();
+		// for, half the number of the population
+		Random rand = new Random();
+
+		while (newGen.size() != population.size()) {
+			Chromosome p1 = population.get(rand.nextInt(population.size()));
+			Chromosome p2 = population.get(rand.nextInt(population.size()));
+			System.out.println(p1.getChromoStr());
+			System.out.println(p2.getChromoStr());
+			int i = rand.nextInt(10 - 0 + 1);
+			if (i < crossoverRate) {
+				System.out.println("i less than crossover: " + i);
+				List<Chromosome> newG = crossover(p1, p2, 2);
+				newGen.addAll(newG);
+			}
+		}
+
+		return newGen;
 	}
 
 	/**
@@ -240,16 +257,9 @@ public class GA {
 		population.add(new Chromosome("yermaw", 3));
 		population.add(new Chromosome("pebble", 1));
 
-		ga.sortbyFitness(population);
-		for (Chromosome bob : population) {
-			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
+		List<Chromosome> boop = ga.fightToTheDeath(population);
+		for (Chromosome c : boop) {
+			System.out.println(c.getChromoStr());
 		}
-
-		System.out.println("\n" + "mutated weaklings" + "\n");
-		ga.children(population);
-		for (Chromosome bob : population) {
-			System.out.println(bob.getFitness() + " : " + bob.getChromoStr());
-		}
-
 	}
 }
