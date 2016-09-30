@@ -27,6 +27,7 @@ public class GA {
 	public static final String target = "hello, world!";
 	public static final int crossoverRate = 7; // Trust the crossover rate
 	public static final int mutationChance = 1;
+	public static final Chromosome targetChromo = new Chromosome(target, 0);
 
 	/**
 	 * Evaluates current fitness of the generation
@@ -249,6 +250,31 @@ public class GA {
 		return children;
 	}
 
+	public void GAlgorithm(int popSize, List<Chromosome> population) {
+		Population p = new Population();
+		// Generate an initial population of chromosomes
+		// List<Chromosome> population = p.getRandPopulationChromo(popSize);
+		// Get the fitness of each
+		mutateRandString(population);
+		while (true) {
+			System.out.println("the population");
+			showPopulation(population);
+			List<Chromosome> boop = fightToTheDeath(population, 1);
+			System.out.println("boop population");
+			showPopulation(boop);
+			System.out.println("\nafter mutating\n");
+			mutateRandString(boop);
+			// population = boop;
+			for (Chromosome pi : population) {
+				if (pi.getChromoStr().equals("bob")) {
+					System.out.println("yas");
+					return;
+				}
+			}
+		}
+
+	}
+
 	public static void main(String[] args) {
 		GA ga = new GA();
 		List<Chromosome> population = new ArrayList<Chromosome>();
@@ -256,25 +282,8 @@ public class GA {
 		population.add(new Chromosome("bop", 1));
 		population.add(new Chromosome("yer", 3));
 		population.add(new Chromosome("peb", 1));
+		ga.GAlgorithm(4, population);
 
-		ga.mutateRandString(population);
-		ga.showPopulation(population);
-
-		
-		while (true) {
-			ga.showPopulation(population);
-			List<Chromosome> boop = ga.fightToTheDeath(population, 1);
-			ga.showPopulation(boop);
-			System.out.println("\nafter mutating\n");
-			ga.mutateRandString(boop);
-			// population = boop;
-			for (Chromosome p : population) {
-				if (p.getChromoStr().equals("bob")) {
-					System.out.println("yas");
-					return;
-				}
-			} 
-		}
 	}
 
 }
