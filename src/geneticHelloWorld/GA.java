@@ -166,8 +166,6 @@ public class GA {
 		while (newGen.size() != population.size()) {
 			Chromosome p1 = population.get(rand.nextInt(population.size()));
 			Chromosome p2 = population.get(rand.nextInt(population.size()));
-			System.out.println(p1.getChromoStr());
-			System.out.println(p2.getChromoStr());
 			int i = rand.nextInt(10 - 0 + 1);
 			if (i < crossoverRate) {
 				System.out.println("i less than crossover: " + i);
@@ -250,39 +248,33 @@ public class GA {
 		return children;
 	}
 
-	public void GAlgorithm(int popSize, List<Chromosome> population) {
+	public void GAlgorithm(int popSize) {
 		Population p = new Population();
 		// Generate an initial population of chromosomes
-		// List<Chromosome> population = p.getRandPopulationChromo(popSize);
+		List<Chromosome> population = p.getRandPopulationChromo(popSize);
 		// Get the fitness of each
-		mutateRandString(population);
 		while (true) {
-			System.out.println("the population");
-			showPopulation(population);
-			List<Chromosome> boop = fightToTheDeath(population, 1);
-			System.out.println("boop population");
-			showPopulation(boop);
-			System.out.println("\nafter mutating\n");
-			mutateRandString(boop);
-			// population = boop;
 			for (Chromosome pi : population) {
-				if (pi.getChromoStr().equals("bob")) {
-					System.out.println("yas");
+				if (pi.getChromoStr().equals(target)) {
+					System.out.println("yas - found target String");
 					return;
 				}
 			}
+
+			System.out.println("the population");
+			showPopulation(population);
+			List<Chromosome> boop = fightToTheDeath(population, 1);
+			System.out.println("boop population before mutating");
+			showPopulation(boop);
+			mutateRandString(boop);
+			System.out.println("\nafter mutating\n");
+			showPopulation(boop);
+			population = boop;
 		}
 
 	}
 
 	public static void main(String[] args) {
-		GA ga = new GA();
-		List<Chromosome> population = new ArrayList<Chromosome>();
-		population.add(new Chromosome("bob", 0));
-		population.add(new Chromosome("bop", 1));
-		population.add(new Chromosome("yer", 3));
-		population.add(new Chromosome("peb", 1));
-		ga.GAlgorithm(4, population);
 
 	}
 
