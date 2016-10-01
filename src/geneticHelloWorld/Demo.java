@@ -26,7 +26,7 @@ public class Demo {
 	public static void main(String[] args) {
 
 		GA ga = new GA();
-		ga.GAlgorithm(10);
+		ga.GAlgorithm(1000);
 
 		/**
 		 * your population seems to generate strings that are the same for the

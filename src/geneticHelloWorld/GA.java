@@ -107,6 +107,7 @@ public class GA {
 		 * going past that
 		 */
 		if (i < mutationChance) {
+			System.out.println("mutating!");
 			int randChar = r.nextInt(populationSpawn.size());
 			String before = populationSpawn.get(randChar).getChromoStr();
 			Chromosome before1 = new Chromosome(before, 0);
@@ -150,6 +151,8 @@ public class GA {
 		newChromoStr2 = indi2Part1 + indi1Part2;
 		Chromosome childOne = new Chromosome(newChromoStr1, 0);
 		Chromosome childTwo = new Chromosome(newChromoStr2, 0);
+		mutate(newChromoStr1);
+		mutate(newChromoStr2);
 		newChromosomes.add(childOne);
 		newChromosomes.add(childTwo);
 		return newChromosomes;
@@ -161,14 +164,13 @@ public class GA {
 	public List<Chromosome> fightToTheDeath(List<Chromosome> population, int crossoverIndex) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		// for, half the number of the population
-		Random rand = new Random();
 
 		while (newGen.size() != population.size()) {
+			Random rand = new Random();
 			Chromosome p1 = population.get(rand.nextInt(population.size()));
 			Chromosome p2 = population.get(rand.nextInt(population.size()));
 			int i = rand.nextInt(10 - 0 + 1);
 			if (i < crossoverRate) {
-				System.out.println("i less than crossover: " + i);
 				List<Chromosome> newG = crossover(p1, p2, crossoverIndex);
 				newGen.addAll(newG); // TODO: fix this shit pls
 			}
@@ -275,7 +277,26 @@ public class GA {
 	}
 
 	public static void main(String[] args) {
-
+		GA ga = new GA();
+		Population p = new Population();
+		// Generate an initial population of chromosomes
+		List<Chromosome> population = p.getRandPopulationChromo(1000000);
+		// Get the fitness of each
+		while (true) {
+			for (Chromosome pi : population) {
+				if (pi.getChromoStr().equals(target)) {
+					System.out.println("yas - found target String");
+					return;
+				}
+			}
+			System.out.println("\nthe population\n");
+			ga.showPopulation(population);
+			System.out.println("\nnow to fight to death!\n");
+			List<Chromosome> boop = ga.fightToTheDeath(population, 2);
+			ga.showPopulation(boop);
+			population = boop;
+			System.out.println("\nthe population\n");
+			ga.showPopulation(population);
+		}
 	}
-
 }
