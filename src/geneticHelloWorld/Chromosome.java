@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Chromosome {
 
+	GA ga = new GA();
 	final String target = "Hello, World!";
 	public int fitness = 0;
 	public String chromoStr = null;
@@ -55,8 +56,9 @@ public class Chromosome {
 	 * @param int
 	 *            fitness
 	 */
-	public void setFitness(int fitness) {
-		this.fitness = fitness;
+	public void setFitness() {
+		GA ga = new GA();
+		this.fitness = ga.individualFitness(this.getChromoStr(), Constants.TARGET);
 	}
 
 	/**
@@ -85,7 +87,7 @@ public class Chromosome {
 		StringBuilder sb = new StringBuilder(13);
 
 		for (int i = 0; i < 13; i++) {
-			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+			sb.append(Constants.AB.charAt(rnd.nextInt(Constants.AB.length())));
 		}
 		chromosome.setChromoStr(sb.toString());
 		return chromosome;
@@ -110,8 +112,9 @@ public class Chromosome {
 	 * @return
 	 */
 	public String genRandGene() {
+		Random r = new Random();
 		String randGene = null;
-		int boop = rnd.nextInt(31 - 0 + 1) + 31;
+		int boop = r.nextInt(31 - 0 + 1) + 31;
 		randGene = String.valueOf(Character.toChars(boop));
 		return randGene;
 	}
