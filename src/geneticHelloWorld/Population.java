@@ -29,8 +29,8 @@ public class Population {
 	public List<Chromosome> getRandPopulationChromo(int popSize) {
 		List<Chromosome> population = new ArrayList<Chromosome>();
 		// Not sure if you should really do this...
-		Chromosome c = new Chromosome();
 		for (int i = 0; i < popSize; i++) {
+			Chromosome c = new Chromosome();
 			population.add(c.randomChromoFromNum());
 		}
 		return population;

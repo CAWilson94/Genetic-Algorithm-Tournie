@@ -10,8 +10,6 @@ public class Chromosome {
 	public String chromoStr = null;
 	public String chromoString = null;
 
-	Random rnd = new Random();
-
 	public Chromosome(String chromoString, int fitness) {
 		this.fitness = fitness; // Defaults at 0
 		this.chromoStr = chromoString;
@@ -69,6 +67,7 @@ public class Chromosome {
 	 * @return chromosome String
 	 */
 	public String randomChromosome() {
+		Random rnd = new Random();
 		String chromosome = null;
 		StringBuilder sb = new StringBuilder(13);
 
@@ -85,6 +84,7 @@ public class Chromosome {
 	 * @return Chromosome object with initialized chromosome string
 	 */
 	public Chromosome randomChromo() {
+		Random rnd = new Random();
 		Chromosome chromosome = new Chromosome();
 		StringBuilder sb = new StringBuilder(13);
 
