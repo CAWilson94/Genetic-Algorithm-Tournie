@@ -53,6 +53,8 @@ public class Chromosome {
 	/**
 	 * Sets fitness associated with chromosome
 	 * 
+	 * @param fitness
+	 * 
 	 * @param int
 	 *            fitness
 	 */
@@ -70,7 +72,7 @@ public class Chromosome {
 		String chromosome = null;
 		StringBuilder sb = new StringBuilder(13);
 
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < Constants.TARGET.length(); i++) {
 			sb.append(Constants.AB.charAt(rnd.nextInt(Constants.AB.length())));
 		}
 		chromosome = sb.toString();
@@ -86,10 +88,11 @@ public class Chromosome {
 		Chromosome chromosome = new Chromosome();
 		StringBuilder sb = new StringBuilder(13);
 
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < Constants.TARGET.length(); i++) {
 			sb.append(Constants.AB.charAt(rnd.nextInt(Constants.AB.length())));
 		}
 		chromosome.setChromoStr(sb.toString());
+		chromosome.setFitness();
 		return chromosome;
 	}
 
@@ -100,10 +103,11 @@ public class Chromosome {
 	 */
 	public Chromosome randomChromoFromNum() {
 		StringBuilder sb = new StringBuilder(13);
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < Constants.TARGET.length(); i++) {
 			sb.append(genRandGene());
 		}
 		this.setChromoStr(sb.toString());
+		this.setFitness();
 		return this;
 	}
 
@@ -127,6 +131,8 @@ public class Chromosome {
 		Chromosome c = new Chromosome();
 		c.randomChromoFromNum();
 		System.out.println(c.getChromoStr());
+		c.setFitness();
+		System.out.println(c.getFitness());
 
 	}
 }

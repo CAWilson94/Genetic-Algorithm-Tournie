@@ -51,7 +51,7 @@ public class GA {
 	public int individualFitness(String individual, String target) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
-		individualFitness = 13 - fit.fitnessFunction(individual, target);
+		individualFitness = fit.fitnessHamming(individual, target);
 		return individualFitness;
 	}
 
@@ -271,14 +271,12 @@ public class GA {
 
 	}
 
+
 	public static void main(String[] args) {
 		Population p = new Population();
+		GA ga = new GA();
 		// Generate an initial population of chromosomes
-		List<Chromosome> population = p.getRandPopulationChromo(10);
-		Chromosome pop = new Chromosome();
-		pop.setChromoStr("Hello World!");
-		pop.setFitness();
-		population.add(pop);
-		System.out.println(population.get(10).getChromoStr() + " : " + population.get(10).getFitness());
+		List<Chromosome> population = p.getRandPopulationChromo(5);
+		ga.showPopulation(population);
 	}
 }
