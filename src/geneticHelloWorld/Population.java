@@ -19,9 +19,9 @@ public class Population {
 	public List<String> getRandPopulation(int popSize) {
 		List<String> population = new ArrayList<String>();
 		// Not sure if you should really do this...
-		Chromosome c = new Chromosome();
 		for (int i = 0; i < popSize; i++) {
-			population.add(c.randomChromoFromNum().getChromoStr());
+			Chromosome c = new Chromosome();
+			population.add(c.randomChromo().getChromoStr());
 		}
 		return population;
 	}
@@ -31,7 +31,7 @@ public class Population {
 		// Not sure if you should really do this...
 		for (int i = 0; i < popSize; i++) {
 			Chromosome c = new Chromosome();
-			population.add(c.randomChromoFromNum());
+			population.add(c.randomChromo());
 		}
 		return population;
 	}

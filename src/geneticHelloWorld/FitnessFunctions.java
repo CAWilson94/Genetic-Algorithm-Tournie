@@ -9,9 +9,6 @@ public class FitnessFunctions {
 		char[] indi = individual.toCharArray();
 		char[] targ = target.toCharArray();
 		
-		System.out.println(indi.length);
-		System.out.println(targ.length);
-
 		for (int i = 0; i < indi.length; i++) {
 
 			if (targ[i] != indi[i]) {

@@ -129,10 +129,7 @@ public class Chromosome {
 	 */
 	public static void main(String[] args) {
 		Chromosome c = new Chromosome();
-		c.randomChromoFromNum();
-		System.out.println(c.getChromoStr());
-		c.setFitness();
-		System.out.println(c.getFitness());
-
+		System.out.println(c.randomChromoFromNum().getChromoStr());
+		System.out.println(c.randomChromo().getChromoStr());
 	}
 }

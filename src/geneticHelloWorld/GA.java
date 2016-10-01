@@ -276,7 +276,7 @@ public class GA {
 		Population p = new Population();
 		GA ga = new GA();
 		// Generate an initial population of chromosomes
-		List<Chromosome> population = p.getRandPopulationChromo(5);
+		List<Chromosome> population = p.getRandPopulationChromo(100);
 		ga.showPopulation(population);
 	}
 }
