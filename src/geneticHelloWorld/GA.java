@@ -24,11 +24,6 @@ import org.w3c.dom.events.MutationEvent;
 
 public class GA {
 
-	public static final String target = "hello, world!";
-	public static final int crossoverRate = 7; // Trust the crossover rate
-	public static final int mutationChance = 1;
-	public static final Chromosome targetChromo = new Chromosome(target, 0);
-
 	/**
 	 * Evaluates current fitness of the generation
 	 * 
@@ -106,7 +101,7 @@ public class GA {
 		 * find a way to make the character rollover from 127 to 32 instaed of
 		 * going past that
 		 */
-		if (i < mutationChance) {
+		if (i < Constants.MUTATION_CHANCE) {
 			System.out.println("mutating!");
 			int randChar = r.nextInt(populationSpawn.size());
 			String before = populationSpawn.get(randChar).getChromoStr();
@@ -170,7 +165,7 @@ public class GA {
 			Chromosome p1 = population.get(rand.nextInt(population.size()));
 			Chromosome p2 = population.get(rand.nextInt(population.size()));
 			int i = rand.nextInt(10 - 0 + 1);
-			if (i < crossoverRate) {
+			if (i < Constants.CROSSOVER_RATE) {
 				List<Chromosome> newG = crossover(p1, p2, crossoverIndex);
 				newGen.addAll(newG); // TODO: fix this shit pls
 			}
@@ -257,7 +252,7 @@ public class GA {
 		// Get the fitness of each
 		while (true) {
 			for (Chromosome pi : population) {
-				if (pi.getChromoStr().equals(target)) {
+				if (pi.getChromoStr().equals(Constants.TARGET)) {
 					System.out.println("yas - found target String");
 					return;
 				}
@@ -284,7 +279,7 @@ public class GA {
 		// Get the fitness of each
 		while (true) {
 			for (Chromosome pi : population) {
-				if (pi.getChromoStr().equals(target)) {
+				if (pi.getChromoStr().equals(Constants.TARGET)) {
 					System.out.println("yas - found target String");
 					return;
 				}

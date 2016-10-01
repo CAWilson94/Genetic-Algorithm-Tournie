@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class Chromosome {
 
-	final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz,./<>?!£$%^&*()_+-=[];#{}:@~'";
 	final String target = "Hello, World!";
 	public int fitness = 0;
 	public String chromoStr = null;
@@ -70,7 +69,7 @@ public class Chromosome {
 		StringBuilder sb = new StringBuilder(13);
 
 		for (int i = 0; i < 13; i++) {
-			sb.append(AB.charAt(rnd.nextInt(AB.length())));
+			sb.append(Constants.AB.charAt(rnd.nextInt(Constants.AB.length())));
 		}
 		chromosome = sb.toString();
 		return chromosome;
@@ -106,6 +105,10 @@ public class Chromosome {
 		return this;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String genRandGene() {
 		String randGene = null;
 		int boop = rnd.nextInt(31 - 0 + 1) + 31;
@@ -113,6 +116,10 @@ public class Chromosome {
 		return randGene;
 	}
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Chromosome c = new Chromosome();
 		c.randomChromoFromNum();
