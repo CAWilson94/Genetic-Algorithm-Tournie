@@ -145,7 +145,9 @@ public class GA {
 		newChromoStr1 = indi1Part1 + indi2Part2;
 		newChromoStr2 = indi2Part1 + indi1Part2;
 		Chromosome childOne = new Chromosome(newChromoStr1, 0);
+		childOne.setFitness();
 		Chromosome childTwo = new Chromosome(newChromoStr2, 0);
+		childTwo.setFitness();
 		mutate(newChromoStr1);
 		mutate(newChromoStr2);
 		newChromosomes.add(childOne);
@@ -159,11 +161,13 @@ public class GA {
 	public List<Chromosome> fightToTheDeath(List<Chromosome> population, int crossoverIndex) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		// for, half the number of the population
-
 		while (newGen.size() != population.size()) {
 			Random rand = new Random();
+			// Select two random parents
 			Chromosome p1 = population.get(rand.nextInt(population.size()));
+			System.out.println("parent one: " + p1.getChromoStr());
 			Chromosome p2 = population.get(rand.nextInt(population.size()));
+			System.out.println("parent two: " + p2.getChromoStr());
 			int i = rand.nextInt(10 - 0 + 1);
 			if (i < Constants.CROSSOVER_RATE) {
 				List<Chromosome> newG = crossover(p1, p2, crossoverIndex);
@@ -172,6 +176,21 @@ public class GA {
 		}
 
 		return newGen;
+	}
+
+	public List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
+		List<Chromosome> newGen = new ArrayList<Chromosome>();
+
+		// two random members of the population
+		Random rand = new Random();
+		newGen.add(population.get(rand.nextInt(population.size())));
+		newGen.add(population.get(rand.nextInt(population.size())));
+		showPopulation(newGen);
+		newGen.remove(0);
+		System.out.println("\nthe winner\n");
+		showPopulation(newGen);
+		return newGen;
+
 	}
 
 	/**
@@ -250,6 +269,7 @@ public class GA {
 		// Generate an initial population of chromosomes
 		List<Chromosome> population = p.getRandPopulationChromo(popSize);
 		// Get the fitness of each
+		showPopulation(population);
 		while (true) {
 			for (Chromosome pi : population) {
 				if (pi.getChromoStr().equals(Constants.TARGET)) {
@@ -258,25 +278,34 @@ public class GA {
 				}
 			}
 
-			System.out.println("the population");
-			showPopulation(population);
-			List<Chromosome> boop = fightToTheDeath(population, 1);
-			System.out.println("boop population before mutating");
-			showPopulation(boop);
-			mutateRandString(boop);
-			System.out.println("\nafter mutating\n");
-			showPopulation(boop);
-			population = boop;
+			List<Chromosome> kids = children(population);
+			showPopulation(kids);
+
 		}
 
 	}
 
+	public void gawww() {
+
+		// Initalise a population
+		Population pop = new Population();
+		List<Chromosome> population = pop.getRandPopulationChromo(6);
+		// Sort the fitness of all
+		sortbyFitness(population);
+		showPopulation(population);
+		// Check if you have found hello world yet
+		if (population.get(0).getFitness() == 0) {
+			System.out.println("found something: " + population.get(0).getChromoStr());
+			return;
+		}
+		// Assuming you havent found it: reproduction
+		System.out.println("\nfighting time\n");
+		tournie(population, 5);
+
+	}
 
 	public static void main(String[] args) {
-		Population p = new Population();
 		GA ga = new GA();
-		// Generate an initial population of chromosomes
-		List<Chromosome> population = p.getRandPopulationChromo(100);
-		ga.showPopulation(population);
+		ga.gawww();
 	}
 }
