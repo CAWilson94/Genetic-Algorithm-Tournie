@@ -181,21 +181,32 @@ public class GA {
 	public List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		List<Chromosome> tempArray = new ArrayList<Chromosome>();
+		List<Chromosome> crossed = new ArrayList<Chromosome>();
 
-		// two random members of the population
-		for (int i = 0; i < 2; i++) {
-			Random rand = new Random();
-			tempArray.add(population.get(rand.nextInt(population.size())));
-			tempArray.add(population.get(rand.nextInt(population.size())));
-			System.out.println("\ntemp array\n");
-			sortbyFitness(tempArray);
-			showPopulation(tempArray);
-			newGen.add(tempArray.get(1));
-			System.out.println("\nthe winner\n");
-			showPopulation(newGen);
+		while (crossed.size() != population.size()) {
+			// two random members of the population
+			for (int i = 0; i < 2; i++) {
+				Random rand = new Random();
+				int one = rand.nextInt(population.size());
+				int two = rand.nextInt(population.size());
+				tempArray.add(population.get(one));
+				tempArray.add(population.get(two));
+				sortbyFitness(tempArray);
+				newGen.add(tempArray.get(1));
+				tempArray.clear();
+			}
+			Random r = new Random();
+			int i = r.nextInt(10 - 0 + 1);
+			if (i < Constants.CROSSOVER_RATE) {
+				List<Chromosome> temp = crossover(newGen.get(0), newGen.get(1), 5);
+				crossed.addAll(temp);
+			}
 		}
-		return newGen;
 
+		System.out.println("\nchildren yasss\n");
+		showPopulation(crossed);
+
+		return crossed;
 	}
 
 	/**
