@@ -51,7 +51,7 @@ public class GA {
 	public int individualFitness(String individual, String target) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
-		individualFitness = fit.fitnessFunction(individual, target);
+		individualFitness = fit.fitnessHamming(individual, target);
 		return individualFitness;
 	}
 
