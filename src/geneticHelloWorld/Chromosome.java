@@ -5,14 +5,12 @@ import java.util.Random;
 public class Chromosome {
 
 	GA ga = new GA();
-	final String target = "Hello, World!";
 	public int fitness = 0;
 	public String chromoStr = null;
-	public String chromoString = null;
 
-	public Chromosome(String chromoString, int fitness) {
+	public Chromosome(String chromoStr, int fitness) {
 		this.fitness = fitness; // Defaults at 0
-		this.chromoStr = chromoString;
+		this.chromoStr = chromoStr;
 	}
 
 	public Chromosome() {
@@ -62,41 +60,6 @@ public class Chromosome {
 	}
 
 	/**
-	 * Returns the string of a chromosome directly: might be useless...
-	 * 
-	 * @return chromosome String
-	 */
-	public String randomChromosome() {
-		Random rnd = new Random();
-		String chromosome = null;
-		StringBuilder sb = new StringBuilder(13);
-
-		for (int i = 0; i < Constants.TARGET.length(); i++) {
-			sb.append(Constants.AB.charAt(rnd.nextInt(Constants.AB.length())));
-		}
-		chromosome = sb.toString();
-		return chromosome;
-	}
-
-	/**
-	 * Returns the chromosome objects generated randomly
-	 * 
-	 * @return Chromosome object with initialized chromosome string
-	 */
-	public Chromosome randomChromo() {
-		Random rnd = new Random();
-		Chromosome chromosome = new Chromosome();
-		StringBuilder sb = new StringBuilder(13);
-
-		for (int i = 0; i < Constants.TARGET.length(); i++) {
-			sb.append(Constants.AB.charAt(rnd.nextInt(Constants.AB.length())));
-		}
-		chromosome.setChromoStr(sb.toString());
-		chromosome.setFitness();
-		return chromosome;
-	}
-
-	/**
 	 * Generate random chromosome String from random numbers
 	 * 
 	 * @return Chromosome chromosome
@@ -121,14 +84,5 @@ public class Chromosome {
 		int boop = r.nextInt(126 - 32 + 1) + 32;
 		randGene = String.valueOf(Character.toChars(boop));
 		return randGene;
-	}
-
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		Chromosome c = new Chromosome();
-		System.out.println(c.randomChromoFromNum().getChromoStr());
 	}
 }

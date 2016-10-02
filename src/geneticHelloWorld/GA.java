@@ -134,7 +134,13 @@ public class GA {
 		return newChromosomes;
 	}
 
-	public List<Chromosome> randomParents(List<Chromosome> population) {
+	/**
+	 * Select Parents for tournament method
+	 * 
+	 * @param population
+	 * @return Chromosome parents
+	 */
+	private List<Chromosome> randomParents(List<Chromosome> population) {
 		List<Chromosome> tempArray = new ArrayList<Chromosome>();
 		List<Chromosome> parents = new ArrayList<Chromosome>();
 		// two random members of the population
@@ -151,6 +157,13 @@ public class GA {
 		return parents;
 	}
 
+	/**
+	 * Tournament to generate new generation
+	 * 
+	 * @param population
+	 * @param crossoverPoint
+	 * @return
+	 */
 	public List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		List<Chromosome> crossed = new ArrayList<Chromosome>();
@@ -166,6 +179,10 @@ public class GA {
 			}
 		}
 		return crossed;
+	}
+
+	public List<Chromosome> elitist() {
+		return null;
 	}
 
 	/**
@@ -239,34 +256,34 @@ public class GA {
 		return children;
 	}
 
+	/**
+	 * Genetic algorithm: evolves a string until target found
+	 */
 	public void GAlgorithm() {
-
 		// Initalise a population
 		Population pop = new Population();
-		List<Chromosome> population = pop.getRandPopulationChromo(1000);
+		List<Chromosome> population = pop.getRandPopulationChromo(10000);
 		// Sort the fitness of all
 		int i = 0;
 		while (true) {
-			// for (int j = 0; i < 2; j++) {
+			i++;
 			sortbyFitness(population);
 			// Check if you have found hello world yet
 			if (population.get(0).getFitness() == 0) {
 				System.out.println("found something: " + population.get(0).getChromoStr());
 				return;
 			}
-			i++;
 			System.out.println("generation: " + i + " best: " + population.get(0).getChromoStr());
 			// Assuming you havent found it: reproduction
 			population = tournie(population, 5);
-			sortbyFitness(population);
 		}
-
 	}
 
 	public static void main(String[] args) {
 
 		GA ga = new GA();
 		ga.GAlgorithm();
+		System.out.println(Constants.MUTATION_CHANCE);
 
 	}
 }
