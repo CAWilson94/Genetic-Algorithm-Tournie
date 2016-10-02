@@ -180,15 +180,20 @@ public class GA {
 
 	public List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
+		List<Chromosome> tempArray = new ArrayList<Chromosome>();
 
 		// two random members of the population
-		Random rand = new Random();
-		newGen.add(population.get(rand.nextInt(population.size())));
-		newGen.add(population.get(rand.nextInt(population.size())));
-		showPopulation(newGen);
-		newGen.remove(0);
-		System.out.println("\nthe winner\n");
-		showPopulation(newGen);
+		for (int i = 0; i < 2; i++) {
+			Random rand = new Random();
+			tempArray.add(population.get(rand.nextInt(population.size())));
+			tempArray.add(population.get(rand.nextInt(population.size())));
+			System.out.println("\ntemp array\n");
+			sortbyFitness(tempArray);
+			showPopulation(tempArray);
+			newGen.add(tempArray.get(1));
+			System.out.println("\nthe winner\n");
+			showPopulation(newGen);
+		}
 		return newGen;
 
 	}
