@@ -278,4 +278,23 @@ public final class GA {
 			population = tournie(population, 5);
 		}
 	}
+
+	public static int random() {
+		Population pop = new Population();
+		List<Chromosome> beep = pop.getRandPopulationChromo(1000);
+		int gen = 0;
+		while (true) {
+			gen++;
+			sortbyFitness(beep);
+			System.out.println("generation: " + gen + " best: " + beep.get(0).getChromoStr() + " Fitness: "
+					+ beep.get(0).getFitness());
+
+			if (beep.get(0).getFitness() == 0 || gen == Constants.MAX_GENERATION) {
+				System.out.println("found something: " + beep.get(0).getChromoStr());
+				return gen;
+			}
+
+			beep = pop.getRandPopulationChromo(1000);
+		}
+	}
 }
