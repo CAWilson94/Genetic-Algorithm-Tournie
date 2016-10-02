@@ -76,8 +76,9 @@ public class GA {
 		Random r = new Random();
 
 		int randChar = r.nextInt(indi.length);
+		Chromosome c = new Chromosome();
 
-		indi[randChar] += r.nextInt((1 - 0) + 1) + 0;
+		indi[randChar] = c.genRandGene().charAt(0);
 		if (indi[randChar] == 127) {
 			indi[randChar] = 32;
 		}
@@ -202,14 +203,8 @@ public class GA {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		List<Chromosome> crossed = new ArrayList<Chromosome>();
 
-		System.out.println("initial pop\n");
-		showPopulation(crossed);
-
 		while (crossed.size() != population.size()) {
-			System.out.println(crossed.size());
-
 			newGen = randomParents(population);
-
 			Random r = new Random();
 			int i = r.nextInt(10 - 0 + 1);
 			if (i < Constants.CROSSOVER_RATE) {
@@ -218,10 +213,6 @@ public class GA {
 				newGen.clear();
 			}
 		}
-
-		System.out.println("crossed and shit\n");
-		showPopulation(crossed);
-
 		return crossed;
 	}
 
@@ -321,24 +312,22 @@ public class GA {
 
 		// Initalise a population
 		Population pop = new Population();
-		List<Chromosome> population = pop.getRandPopulationChromo(5);
+		List<Chromosome> population = pop.getRandPopulationChromo(1000);
 		// Sort the fitness of all
 		int i = 0;
 		while (true) {
+			// for (int j = 0; i < 2; j++) {
 			sortbyFitness(population);
-			// System.out.println("Gen: " + i + population.get(0).getChromoStr()
-			// + " : " + population.get(0).getFitness());
 			// Check if you have found hello world yet
 			if (population.get(0).getFitness() == 0) {
 				System.out.println("found something: " + population.get(0).getChromoStr());
 				return;
 			}
 			i++;
-			System.out.println("generation: " + i);
-			showPopulation(population);
+			System.out.println("generation: " + i + " best: " + population.get(0).getChromoStr());
 			// Assuming you havent found it: reproduction
-			tournie(population, 5);
-			// showPopulation(population);
+			population = tournie(population, 5);
+			sortbyFitness(population);
 		}
 
 	}
