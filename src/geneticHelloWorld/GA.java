@@ -278,8 +278,4 @@ public final class GA {
 			population = tournie(population, 5);
 		}
 	}
-
-	public static void main(String[] args) {
-		GA.GAlgorithm();
-	}
 }

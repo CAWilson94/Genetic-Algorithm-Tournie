@@ -1,8 +1,5 @@
 package geneticHelloWorld;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * Basic idea is the source, we can view as the DNA of the organism It
  * will randomly mutate some of the DNA then judge the new mutated
@@ -24,15 +21,8 @@ import java.util.List;
 public class Demo {
 
 	public static void main(String[] args) {
-
-		GA ga = new GA();
-		ga.GAlgorithm(1000);
-
-		/**
-		 * your population seems to generate strings that are the same for the
-		 * whole thing...
-		 */
-
+		GA.GAlgorithm(); // Using tournie function
+		// Want to look at roulette and elitist functions and compare performance of them 
 	}
 
 }
