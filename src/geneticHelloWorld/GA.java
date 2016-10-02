@@ -51,7 +51,7 @@ public class GA {
 	public int individualFitness(String individual, String target) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
-		individualFitness = fit.fitnessHamming(individual, target);
+		individualFitness = fit.fitnessFunction(individual, target);
 		return individualFitness;
 	}
 
@@ -192,7 +192,7 @@ public class GA {
 				tempArray.add(population.get(one));
 				tempArray.add(population.get(two));
 				sortbyFitness(tempArray);
-				newGen.add(tempArray.get(1));
+				newGen.add(tempArray.get(0));
 				tempArray.clear();
 			}
 			Random r = new Random();
@@ -200,6 +200,7 @@ public class GA {
 			if (i < Constants.CROSSOVER_RATE) {
 				List<Chromosome> temp = crossover(newGen.get(0), newGen.get(1), 5);
 				crossed.addAll(temp);
+				newGen.clear();
 			}
 		}
 
@@ -305,23 +306,28 @@ public class GA {
 
 		// Initalise a population
 		Population pop = new Population();
-		List<Chromosome> population = pop.getRandPopulationChromo(6);
+		List<Chromosome> population = pop.getRandPopulationChromo(100000);
 		// Sort the fitness of all
-		sortbyFitness(population);
-		showPopulation(population);
-		// Check if you have found hello world yet
-		if (population.get(0).getFitness() == 0) {
-			System.out.println("found something: " + population.get(0).getChromoStr());
-			return;
+
+		
+		while (true) {
+			sortbyFitness(population);
+			showPopulation(population);
+			// Check if you have found hello world yet
+			if (population.get(0).getFitness() == 0) {
+				System.out.println("found something: " + population.get(0).getChromoStr());
+				return;
+			}
+			// Assuming you havent found it: reproduction
+			System.out.println("\nfighting time\n");
+			tournie(population, 5);
 		}
-		// Assuming you havent found it: reproduction
-		System.out.println("\nfighting time\n");
-		tournie(population, 5);
 
 	}
 
 	public static void main(String[] args) {
-		GA ga = new GA();
-		ga.gawww();
+		/*GA ga = new GA();
+		ga.gawww();*/
+
 	}
 }

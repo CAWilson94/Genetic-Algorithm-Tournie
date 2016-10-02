@@ -21,7 +21,6 @@ public class FitnessFunctions {
 	public int fitnessFunction(String individual, String target) {
 
 		int fitness = 0;
-		System.out.println(individual);
 		char[] indi = individual.toCharArray();
 		char[] targ = target.toCharArray();
 
