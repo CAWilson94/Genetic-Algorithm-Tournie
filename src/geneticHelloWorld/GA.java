@@ -259,10 +259,10 @@ public final class GA {
 	/**
 	 * Genetic algorithm: evolves a string until target found
 	 */
-	public static void GAlgorithm() {
+	public static int GAlgorithm(int popSize) {
 		// Initalise a population
 		Population pop = new Population();
-		List<Chromosome> population = pop.getRandPopulationChromo(10000);
+		List<Chromosome> population = pop.getRandPopulationChromo(popSize);
 		// Sort the fitness of all
 		int i = 0;
 		while (true) {
@@ -271,7 +271,7 @@ public final class GA {
 			// Check if you have found hello world yet
 			if (population.get(0).getFitness() == 0) {
 				System.out.println("found something: " + population.get(0).getChromoStr());
-				return;
+				return i;
 			}
 			System.out.println("generation: " + i + " best: " + population.get(0).getChromoStr());
 			// Assuming you havent found it: reproduction

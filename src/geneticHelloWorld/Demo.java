@@ -1,5 +1,8 @@
 package geneticHelloWorld;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * Basic idea is the source, we can view as the DNA of the organism It
  * will randomly mutate some of the DNA then judge the new mutated
@@ -21,8 +24,24 @@ package geneticHelloWorld;
 public class Demo {
 
 	public static void main(String[] args) {
-		GA.GAlgorithm(); // Using tournie function
-		// Want to look at roulette and elitist functions and compare performance of them 
+		List<Double> time = new ArrayList<Double>();
+		List<Integer> gen = new ArrayList<Integer>();
+		int generation = 0;
+		for (int i = 0; i < 20; i++) {
+			long startTime = System.nanoTime();
+			generation = GA.GAlgorithm(10000);
+			gen.add(generation);
+			long endTime = System.nanoTime();
+			double duration = (endTime - startTime) / 1000000000.0;
+			time.add(duration);
+		}
+
+		System.out.println("\n");
+		
+		for (int i = 0; i < time.size(); i++) {
+			System.out.println("time:	" + time.get(i) + "	Gen:	" + gen.get(i));
+		}
+
 	}
 
 }
