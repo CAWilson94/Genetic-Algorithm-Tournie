@@ -1,8 +1,5 @@
 package geneticHelloWorld;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,20 +26,25 @@ import java.util.Scanner;
 public class Demo {
 
 	public static void GAPerformance(int runSize, int popSize) {
+		
 		List<Double> time = new ArrayList<Double>();
 		List<Integer> gen = new ArrayList<Integer>();
+		
 		int generation = 0;
+		
 		for (int i = 0; i < runSize; i++) {
+			
 			long startTime = System.nanoTime();
 			generation = GA.GAlgorithm(popSize);
-			gen.add(generation);
 			long endTime = System.nanoTime();
+			
+			gen.add(generation);
 			double duration = (endTime - startTime) / 1000000000.0;
 			time.add(duration);
 		}
-
+		
 		System.out.println("\n Peformance Results: GA\n");
-
+		
 		for (int i = 0; i < time.size(); i++) {
 			String content = ("time:	" + time.get(i) + "	Gen:	" + gen.get(i));
 			System.out.println(content);
@@ -50,16 +52,16 @@ public class Demo {
 	}
 
 	public static void randomPerformance() {
-
+		
 		System.out.println("\nRandom function: ");
+		
 		long startRand = System.nanoTime();
 		int randGen = GA.random();
 		long endRand = System.nanoTime();
+		
 		double randDuration = (endRand - startRand) / 1000000000.0;
 		System.out.println("\n");
-
 		System.out.println("\n Performance Results: random\n");
-
 		String content = ("time:	" + randDuration + "	Gen:	" + randGen);
 		System.out.println(content);
 	}
@@ -79,9 +81,10 @@ public class Demo {
 				System.out.println("Not a number ya tit");
 			}
 			char input = s.charAt(0);
+			
 			switch (input) {
 			case '1':
-				Demo.GAPerformance(10,1000);
+				Demo.GAPerformance(10, 1000);
 				break;
 			case '2':
 				Demo.randomPerformance();

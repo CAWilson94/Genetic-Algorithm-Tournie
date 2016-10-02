@@ -167,9 +167,11 @@ public final class GA {
 	public static List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		List<Chromosome> crossed = new ArrayList<Chromosome>();
-
+		// Until new generation has same number of individuals as population
 		while (crossed.size() != population.size()) {
+			// Select random parents: i.e. the best fittest
 			newGen = randomParents(population);
+			// Check against crossover rate, before crossover
 			Random r = new Random();
 			int i = r.nextInt(10 - 0 + 1);
 			if (i < Constants.CROSSOVER_RATE) {
@@ -256,6 +258,21 @@ public final class GA {
 		return children;
 	}
 
+	public static Boolean levelOff(List<Chromosome> best) {
+		Boolean level = false;
+		for (int i = 1; i < best.size(); i++) {
+			FitnessFunctions f = new FitnessFunctions();
+			int one = f.fitnessFunction(best.get(0).getChromoStr(), Constants.TARGET);
+			int two = f.fitnessFunction(best.get(i).getChromoStr(), Constants.TARGET);
+			int temp = Math.abs(one - two);
+			if (temp < 3) {
+				System.out.println("\nthey are becoming the same :(\n");
+				level = true;
+			}
+		}
+		return level;
+	}
+
 	/**
 	 * Genetic algorithm: evolves a string until target found
 	 */
@@ -263,17 +280,21 @@ public final class GA {
 		// Initalise a population
 		Population pop = new Population();
 		List<Chromosome> population = pop.getRandPopulationChromo(popSize);
-		// Sort the fitness of all
-		int i = 0;
+		List<Chromosome> best = new ArrayList<Chromosome>();
+
+		int gen = 0;
 		while (true) {
-			i++;
+			gen++;
+			// Sort the fitness of all
 			sortbyFitness(population);
+			best.add(population.get(0));
 			// Check if you have found hello world yet
-			if (population.get(0).getFitness() == 0) {
+			if (population.get(0).getFitness() == 0 || gen == Constants.MAX_GENERATION) {
 				System.out.println("found something: " + population.get(0).getChromoStr());
-				return i;
+				return gen;
 			}
-			System.out.println("generation: " + i + " best: " + population.get(0).getChromoStr());
+
+			System.out.println("generation: " + gen + " best: " + population.get(0).getChromoStr());
 			// Assuming you havent found it: reproduction
 			population = tournie(population, 5);
 		}
@@ -296,5 +317,11 @@ public final class GA {
 
 			beep = pop.getRandPopulationChromo(1000);
 		}
+	}
+
+	public static void main(String[] args) {
+		Population p = new Population();
+		List<Chromosome> best = p.getRandPopulationChromo(10);
+		GA.levelOff(best);
 	}
 }
