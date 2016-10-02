@@ -9,12 +9,12 @@ public class FitnessFunctions {
 	 * @param target
 	 * @return
 	 */
-	public int fitnessHamming(String individual, String target) {
+	public int fitnessHamming(String individual) {
 
 		int hammingFitness = 0;
 
 		char[] indi = individual.toCharArray();
-		char[] targ = target.toCharArray();
+		char[] targ = Constants.TARGET.toCharArray();
 
 		for (int i = 0; i < indi.length; i++) {
 
@@ -32,11 +32,11 @@ public class FitnessFunctions {
 	 * @param target
 	 * @return
 	 */
-	public int fitnessFunction(String individual, String target) {
+	public int fitnessFunction(String individual) {
 
 		int fitness = 0;
 		char[] indi = individual.toCharArray();
-		char[] targ = target.toCharArray();
+		char[] targ = Constants.TARGET.toCharArray();
 
 		for (int i = 0; i < indi.length; i++) {
 			int indiInt = Math.abs((Character.getNumericValue(indi[i])));

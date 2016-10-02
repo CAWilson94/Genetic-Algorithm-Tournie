@@ -55,7 +55,7 @@ public class Chromosome {
 	 */
 	public void setFitness() {
 		GA ga = new GA();
-		this.fitness = GA.individualFitness(this.getChromoStr(), Constants.TARGET);
+		this.fitness = GA.individualFitness(this.getChromoStr());
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Chromosome {
 	 * @return Chromosome chromosome
 	 */
 	public Chromosome randomChromoFromNum() {
-		StringBuilder sb = new StringBuilder(13);
+		StringBuilder sb = new StringBuilder(Constants.TARGET.length());
 		for (int i = 0; i < Constants.TARGET.length(); i++) {
 			sb.append(genRandGene());
 		}

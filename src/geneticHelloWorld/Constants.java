@@ -7,4 +7,8 @@ public class Constants {
 	public static final int MUTATION_CHANCE = 1;
 	public static final Chromosome TARGET_CHROMOSOME = new Chromosome(TARGET, 0);
 	public static final int MAX_GENERATION = 3000;
+	public static final String CHARLOTTE = "Charlotte";
+	public static final Chromosome CHAR_CHROMOSOME = new Chromosome(CHARLOTTE, 0);
+	public static final int POP_SIZE = 1000;
+	public static final int crossoverPoint = TARGET.length()/2+1;
 }

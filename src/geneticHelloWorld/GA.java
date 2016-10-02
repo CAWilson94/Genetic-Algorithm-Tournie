@@ -36,7 +36,7 @@ public final class GA {
 	public static int populationFitness(String target, List<String> population) {
 		int populationFitness = 0;
 		for (String p : population) {
-			populationFitness += individualFitness(p, target);
+			populationFitness += individualFitness(p);
 		}
 		return populationFitness;
 	}
@@ -48,10 +48,10 @@ public final class GA {
 	 * @param target
 	 * @return
 	 */
-	public static int individualFitness(String individual, String target) {
+	public static int individualFitness(String individual) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
-		individualFitness = fit.fitnessHamming(individual, target);
+		individualFitness = fit.fitnessHamming(individual);
 		return individualFitness;
 	}
 
@@ -107,15 +107,15 @@ public final class GA {
 	 * @param crossoverPoint
 	 * @return List<String> new chromosomes
 	 */
-	public static List<Chromosome> crossover(Chromosome parent1, Chromosome parent2, int crossoverPoint) {
+	public static List<Chromosome> crossover(Chromosome parent1, Chromosome parent2) {
 		List<Chromosome> newChromosomes = new ArrayList<Chromosome>();
 		String newChromoStr1 = null;
 		String newChromoStr2 = null;
 		// Create substrings for crossover
-		String indi1Part1 = parent1.getChromoStr().substring(0, crossoverPoint);
-		String indi1Part2 = parent1.getChromoStr().substring(crossoverPoint, parent1.getChromoStr().length());
-		String indi2Part1 = parent2.getChromoStr().substring(0, crossoverPoint);
-		String indi2Part2 = parent2.getChromoStr().substring(crossoverPoint, parent2.getChromoStr().length());
+		String indi1Part1 = parent1.getChromoStr().substring(0, Constants.crossoverPoint);
+		String indi1Part2 = parent1.getChromoStr().substring(Constants.crossoverPoint, parent1.getChromoStr().length());
+		String indi2Part1 = parent2.getChromoStr().substring(0, Constants.crossoverPoint);
+		String indi2Part2 = parent2.getChromoStr().substring(Constants.crossoverPoint, parent2.getChromoStr().length());
 		// New children strings for new generation
 		newChromoStr1 = indi1Part1 + indi2Part2;
 		newChromoStr2 = indi2Part1 + indi1Part2;
@@ -164,7 +164,7 @@ public final class GA {
 	 * @param crossoverPoint
 	 * @return
 	 */
-	public static List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
+	public static List<Chromosome> tournie(List<Chromosome> population) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		List<Chromosome> crossed = new ArrayList<Chromosome>();
 		// Until new generation has same number of individuals as population
@@ -175,7 +175,7 @@ public final class GA {
 			Random r = new Random();
 			int i = r.nextInt(10 - 0 + 1);
 			if (i < Constants.CROSSOVER_RATE) {
-				List<Chromosome> temp = crossover(newGen.get(0), newGen.get(1), 5);
+				List<Chromosome> temp = crossover(newGen.get(0), newGen.get(1));
 				crossed.addAll(temp);
 				newGen.clear();
 			}
@@ -263,8 +263,8 @@ public final class GA {
 		int bestNum = 0;
 		for (int i = 1; i < best.size(); i++) {
 			FitnessFunctions f = new FitnessFunctions();
-			int one = f.fitnessFunction(best.get(0).getChromoStr(), Constants.TARGET);
-			int two = f.fitnessFunction(best.get(i).getChromoStr(), Constants.TARGET);
+			int one = f.fitnessFunction(best.get(0).getChromoStr());
+			int two = f.fitnessFunction(best.get(i).getChromoStr());
 			int temp = Math.abs(one - two);
 			if (temp == 0) {
 				bestNum = +1;
@@ -280,10 +280,10 @@ public final class GA {
 	/**
 	 * Genetic algorithm: evolves a string until target found
 	 */
-	public static int GAlgorithm(int popSize) {
+	public static int GAlgorithm() {
 		// Initalise a population
 		Population pop = new Population();
-		List<Chromosome> population = pop.getRandPopulationChromo(popSize);
+		List<Chromosome> population = pop.getRandPopulationChromo();
 		List<Chromosome> best = new ArrayList<Chromosome>();
 
 		int gen = 0;
@@ -298,20 +298,21 @@ public final class GA {
 			// Add current to best array
 			best.add(population.get(0));
 			// Check if you have found hello world yet
-			if (population.get(0).getFitness() == 0 || gen == Constants.MAX_GENERATION) {
+			if (population.get(0)
+					.getFitness() == 0 /* || gen == Constants.MAX_GENERATION */) {
 				System.out.println("found something: " + population.get(0).getChromoStr());
 				return gen;
 			}
 
 			System.out.println("generation: " + gen + " best: " + population.get(0).getChromoStr());
 			// Assuming you havent found it: reproduction
-			population = tournie(population, 5);
+			population = tournie(population);
 		}
 	}
 
 	public static int random() {
 		Population pop = new Population();
-		List<Chromosome> beep = pop.getRandPopulationChromo(1000);
+		List<Chromosome> beep = pop.getRandPopulationChromo();
 		int gen = 0;
 		while (true) {
 			gen++;
@@ -324,13 +325,12 @@ public final class GA {
 				return gen;
 			}
 
-			beep = pop.getRandPopulationChromo(1000);
+			beep = pop.getRandPopulationChromo();
 		}
 	}
 
 	public static void main(String[] args) {
-		Population p = new Population();
-		List<Chromosome> best = p.getRandPopulationChromo(10);
-		GA.levelOff(best);
+		System.out.println(Constants.CHARLOTTE.length());
+		GA.GAlgorithm();
 	}
 }

@@ -11,7 +11,8 @@ public class Population {
 	 * @param popSize
 	 * @return random population
 	 */
-	public List<Chromosome> getRandPopulationChromo(int popSize) {
+	public List<Chromosome> getRandPopulationChromo() {
+		int popSize = Constants.POP_SIZE;
 		if ((popSize % 2) != 0) {
 			popSize += 1;
 		}

@@ -35,7 +35,7 @@ public class Demo {
 		for (int i = 0; i < runSize; i++) {
 			
 			long startTime = System.nanoTime();
-			generation = GA.GAlgorithm(popSize);
+			generation = GA.GAlgorithm();
 			long endTime = System.nanoTime();
 			
 			gen.add(generation);
