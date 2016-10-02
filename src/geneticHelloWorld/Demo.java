@@ -28,13 +28,13 @@ import java.util.Scanner;
 
 public class Demo {
 
-	public static void GAPerformance(int runSize) {
+	public static void GAPerformance(int runSize, int popSize) {
 		List<Double> time = new ArrayList<Double>();
 		List<Integer> gen = new ArrayList<Integer>();
 		int generation = 0;
 		for (int i = 0; i < runSize; i++) {
 			long startTime = System.nanoTime();
-			generation = GA.GAlgorithm(10000);
+			generation = GA.GAlgorithm(popSize);
 			gen.add(generation);
 			long endTime = System.nanoTime();
 			double duration = (endTime - startTime) / 1000000000.0;
@@ -81,7 +81,7 @@ public class Demo {
 			char input = s.charAt(0);
 			switch (input) {
 			case '1':
-				Demo.GAPerformance(10);
+				Demo.GAPerformance(10,1000);
 				break;
 			case '2':
 				Demo.randomPerformance();
