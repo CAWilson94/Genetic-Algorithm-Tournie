@@ -70,10 +70,9 @@ public class GA {
 	 * Mutate a random gene in a chromosome
 	 * 
 	 * @param individual
-	 * @return
 	 */
-	public Chromosome mutate(String individual) {
-		char[] indi = individual.toCharArray();
+	public void mutate(Chromosome individual) {
+		char[] indi = individual.getChromoStr().toCharArray();
 		Random r = new Random();
 
 		int randChar = r.nextInt(indi.length);
@@ -83,9 +82,8 @@ public class GA {
 			indi[randChar] = 32;
 		}
 		String indiStr = String.valueOf(indi);
-		Chromosome chromo = new Chromosome(indiStr, 0);
-
-		return chromo;
+		individual.setChromoStr(indiStr);
+		individual.setFitness();
 	}
 
 	/**
@@ -106,8 +104,7 @@ public class GA {
 			int randChar = r.nextInt(populationSpawn.size());
 			String before = populationSpawn.get(randChar).getChromoStr();
 			Chromosome before1 = new Chromosome(before, 0);
-			Chromosome boop = mutate(populationSpawn.get(randChar).getChromoStr());
-			populationSpawn.set(randChar, boop);
+			populationSpawn.set(randChar, mutate(populationSpawn.get(randChar)));
 		}
 
 	}
@@ -148,8 +145,12 @@ public class GA {
 		childOne.setFitness();
 		Chromosome childTwo = new Chromosome(newChromoStr2, 0);
 		childTwo.setFitness();
-		mutate(newChromoStr1);
-		mutate(newChromoStr2);
+		Random r = new Random();
+		int i = r.nextInt(10 - 0 + 1);
+		if (i > Constants.MUTATION_CHANCE) {
+			mutate(childOne);
+			mutate(childTwo);
+		}
 		newChromosomes.add(childOne);
 		newChromosomes.add(childTwo);
 		return newChromosomes;
@@ -178,23 +179,37 @@ public class GA {
 		return newGen;
 	}
 
+	public List<Chromosome> randomParents(List<Chromosome> population) {
+		List<Chromosome> tempArray = new ArrayList<Chromosome>();
+		List<Chromosome> parents = new ArrayList<Chromosome>();
+		// two random members of the population
+		for (int i = 0; i < 2; i++) {
+			Random rand = new Random();
+			int one = rand.nextInt(population.size());
+			int two = rand.nextInt(population.size());
+			tempArray.add(population.get(one));
+			tempArray.add(population.get(two));
+			sortbyFitness(tempArray);
+			parents.add(tempArray.get(0));
+			tempArray.clear();
+		}
+
+		return parents;
+
+	}
+
 	public List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
-		List<Chromosome> tempArray = new ArrayList<Chromosome>();
 		List<Chromosome> crossed = new ArrayList<Chromosome>();
 
+		System.out.println("initial pop\n");
+		showPopulation(crossed);
+
 		while (crossed.size() != population.size()) {
-			// two random members of the population
-			for (int i = 0; i < 2; i++) {
-				Random rand = new Random();
-				int one = rand.nextInt(population.size());
-				int two = rand.nextInt(population.size());
-				tempArray.add(population.get(one));
-				tempArray.add(population.get(two));
-				sortbyFitness(tempArray);
-				newGen.add(tempArray.get(0));
-				tempArray.clear();
-			}
+			System.out.println(crossed.size());
+
+			newGen = randomParents(population);
+
 			Random r = new Random();
 			int i = r.nextInt(10 - 0 + 1);
 			if (i < Constants.CROSSOVER_RATE) {
@@ -204,7 +219,7 @@ public class GA {
 			}
 		}
 
-		System.out.println("\nchildren yasss\n");
+		System.out.println("crossed and shit\n");
 		showPopulation(crossed);
 
 		return crossed;
@@ -306,28 +321,32 @@ public class GA {
 
 		// Initalise a population
 		Population pop = new Population();
-		List<Chromosome> population = pop.getRandPopulationChromo(100000);
+		List<Chromosome> population = pop.getRandPopulationChromo(5);
 		// Sort the fitness of all
-
-		
+		int i = 0;
 		while (true) {
 			sortbyFitness(population);
-			showPopulation(population);
+			// System.out.println("Gen: " + i + population.get(0).getChromoStr()
+			// + " : " + population.get(0).getFitness());
 			// Check if you have found hello world yet
 			if (population.get(0).getFitness() == 0) {
 				System.out.println("found something: " + population.get(0).getChromoStr());
 				return;
 			}
+			i++;
+			System.out.println("generation: " + i);
+			showPopulation(population);
 			// Assuming you havent found it: reproduction
-			System.out.println("\nfighting time\n");
 			tournie(population, 5);
+			// showPopulation(population);
 		}
 
 	}
 
 	public static void main(String[] args) {
-		/*GA ga = new GA();
-		ga.gawww();*/
+
+		GA ga = new GA();
+		ga.gawww();
 
 	}
 }

@@ -118,7 +118,7 @@ public class Chromosome {
 	public String genRandGene() {
 		Random r = new Random();
 		String randGene = null;
-		int boop = r.nextInt(31 - 0 + 1) + 31;
+		int boop = r.nextInt(126 - 32 + 1) + 32;
 		randGene = String.valueOf(Character.toChars(boop));
 		return randGene;
 	}
@@ -130,6 +130,5 @@ public class Chromosome {
 	public static void main(String[] args) {
 		Chromosome c = new Chromosome();
 		System.out.println(c.randomChromoFromNum().getChromoStr());
-		System.out.println(c.randomChromo().getChromoStr());
 	}
 }
