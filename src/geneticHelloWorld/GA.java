@@ -88,29 +88,6 @@ public class GA {
 	}
 
 	/**
-	 * Mutate one random chromosome in the population
-	 * 
-	 * @param mutationChance
-	 * @param populationSpawn
-	 */
-	public void mutateRandString(List<Chromosome> populationSpawn) {
-		Random r = new Random();
-		int i = r.nextInt(10 - 0 + 1);
-		/**
-		 * find a way to make the character rollover from 127 to 32 instaed of
-		 * going past that
-		 */
-		if (i < Constants.MUTATION_CHANCE) {
-			System.out.println("mutating!");
-			int randChar = r.nextInt(populationSpawn.size());
-			String before = populationSpawn.get(randChar).getChromoStr();
-			Chromosome before1 = new Chromosome(before, 0);
-			populationSpawn.set(randChar, mutate(populationSpawn.get(randChar)));
-		}
-
-	}
-
-	/**
 	 * 
 	 * @return int survivalChance
 	 */
@@ -157,29 +134,6 @@ public class GA {
 		return newChromosomes;
 	}
 
-	/**
-	 * Tournie selection
-	 */
-	public List<Chromosome> fightToTheDeath(List<Chromosome> population, int crossoverIndex) {
-		List<Chromosome> newGen = new ArrayList<Chromosome>();
-		// for, half the number of the population
-		while (newGen.size() != population.size()) {
-			Random rand = new Random();
-			// Select two random parents
-			Chromosome p1 = population.get(rand.nextInt(population.size()));
-			System.out.println("parent one: " + p1.getChromoStr());
-			Chromosome p2 = population.get(rand.nextInt(population.size()));
-			System.out.println("parent two: " + p2.getChromoStr());
-			int i = rand.nextInt(10 - 0 + 1);
-			if (i < Constants.CROSSOVER_RATE) {
-				List<Chromosome> newG = crossover(p1, p2, crossoverIndex);
-				newGen.addAll(newG); // TODO: fix this shit pls
-			}
-		}
-
-		return newGen;
-	}
-
 	public List<Chromosome> randomParents(List<Chromosome> population) {
 		List<Chromosome> tempArray = new ArrayList<Chromosome>();
 		List<Chromosome> parents = new ArrayList<Chromosome>();
@@ -194,9 +148,7 @@ public class GA {
 			parents.add(tempArray.get(0));
 			tempArray.clear();
 		}
-
 		return parents;
-
 	}
 
 	public List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
@@ -287,28 +239,7 @@ public class GA {
 		return children;
 	}
 
-	public void GAlgorithm(int popSize) {
-		Population p = new Population();
-		// Generate an initial population of chromosomes
-		List<Chromosome> population = p.getRandPopulationChromo(popSize);
-		// Get the fitness of each
-		showPopulation(population);
-		while (true) {
-			for (Chromosome pi : population) {
-				if (pi.getChromoStr().equals(Constants.TARGET)) {
-					System.out.println("yas - found target String");
-					return;
-				}
-			}
-
-			List<Chromosome> kids = children(population);
-			showPopulation(kids);
-
-		}
-
-	}
-
-	public void gawww() {
+	public void GAlgorithm() {
 
 		// Initalise a population
 		Population pop = new Population();
@@ -335,7 +266,7 @@ public class GA {
 	public static void main(String[] args) {
 
 		GA ga = new GA();
-		ga.gawww();
+		ga.GAlgorithm();
 
 	}
 }
