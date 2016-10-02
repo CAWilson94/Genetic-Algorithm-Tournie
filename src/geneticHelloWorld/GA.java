@@ -22,7 +22,7 @@ import org.w3c.dom.events.MutationEvent;
  *
  */
 
-public class GA {
+public final class GA {
 
 	/**
 	 * Evaluates current fitness of the generation
@@ -33,7 +33,7 @@ public class GA {
 	 *            the population of individuals
 	 * @return overall fitness of current population
 	 */
-	public int populationFitness(String target, List<String> population) {
+	public static int populationFitness(String target, List<String> population) {
 		int populationFitness = 0;
 		for (String p : population) {
 			populationFitness += individualFitness(p, target);
@@ -48,7 +48,7 @@ public class GA {
 	 * @param target
 	 * @return
 	 */
-	public int individualFitness(String individual, String target) {
+	public static int individualFitness(String individual, String target) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
 		individualFitness = fit.fitnessHamming(individual, target);
@@ -60,7 +60,7 @@ public class GA {
 	 * 
 	 * @param population
 	 */
-	public void showPopulation(List<Chromosome> population) {
+	public static void showPopulation(List<Chromosome> population) {
 		for (Chromosome P : population) {
 			System.out.println(P.getChromoStr() + " : " + P.getFitness());
 		}
@@ -71,7 +71,7 @@ public class GA {
 	 * 
 	 * @param individual
 	 */
-	public void mutate(Chromosome individual) {
+	public static void mutate(Chromosome individual) {
 		char[] indi = individual.getChromoStr().toCharArray();
 		Random r = new Random();
 
@@ -91,7 +91,7 @@ public class GA {
 	 * 
 	 * @return int survivalChance
 	 */
-	public double calcSurvivalChance(int fitnessValue, int totalFitness) {
+	public static double calcSurvivalChance(int fitnessValue, int totalFitness) {
 		double survival = 0;
 		System.out.println("indi fitness: " + fitnessValue + ":" + "total: " + totalFitness);
 		survival = Math.round((fitnessValue / (double) totalFitness) * 100);
@@ -107,7 +107,7 @@ public class GA {
 	 * @param crossoverPoint
 	 * @return List<String> new chromosomes
 	 */
-	public List<Chromosome> crossover(Chromosome parent1, Chromosome parent2, int crossoverPoint) {
+	public static List<Chromosome> crossover(Chromosome parent1, Chromosome parent2, int crossoverPoint) {
 		List<Chromosome> newChromosomes = new ArrayList<Chromosome>();
 		String newChromoStr1 = null;
 		String newChromoStr2 = null;
@@ -140,7 +140,7 @@ public class GA {
 	 * @param population
 	 * @return Chromosome parents
 	 */
-	private List<Chromosome> randomParents(List<Chromosome> population) {
+	private static List<Chromosome> randomParents(List<Chromosome> population) {
 		List<Chromosome> tempArray = new ArrayList<Chromosome>();
 		List<Chromosome> parents = new ArrayList<Chromosome>();
 		// two random members of the population
@@ -164,7 +164,7 @@ public class GA {
 	 * @param crossoverPoint
 	 * @return
 	 */
-	public List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
+	public static List<Chromosome> tournie(List<Chromosome> population, int crossoverPoint) {
 		List<Chromosome> newGen = new ArrayList<Chromosome>();
 		List<Chromosome> crossed = new ArrayList<Chromosome>();
 
@@ -191,7 +191,7 @@ public class GA {
 	 * @param chromosomes
 	 * @return
 	 */
-	public void sortbyFitness(List<Chromosome> chromosomes) {
+	public static void sortbyFitness(List<Chromosome> chromosomes) {
 
 		Comparator<Chromosome> comparator = new Comparator<Chromosome>() {
 			@Override
@@ -209,7 +209,7 @@ public class GA {
 	 * @param population
 	 * @return
 	 */
-	public void keepFittest(List<Chromosome> population) {
+	public static void keepFittest(List<Chromosome> population) {
 
 		int half = population.size() / 2;
 		for (int i = 0; i < half; i++) {
@@ -224,7 +224,7 @@ public class GA {
 	 * @param population
 	 * @return
 	 */
-	public List<Chromosome> iscolateWeakest(List<Chromosome> population) {
+	public static List<Chromosome> iscolateWeakest(List<Chromosome> population) {
 		int half = population.size() / 2 - 1;
 		int end = population.size() - 1;
 
@@ -240,7 +240,7 @@ public class GA {
 	 * @param population
 	 * @return
 	 */
-	public List<Chromosome> children(List<Chromosome> population) {
+	public static List<Chromosome> children(List<Chromosome> population) {
 		List<Chromosome> children = new ArrayList<Chromosome>();
 		// Want to look at second half of arraylist here
 		population = iscolateWeakest(population);
@@ -259,7 +259,7 @@ public class GA {
 	/**
 	 * Genetic algorithm: evolves a string until target found
 	 */
-	public void GAlgorithm() {
+	public static void GAlgorithm() {
 		// Initalise a population
 		Population pop = new Population();
 		List<Chromosome> population = pop.getRandPopulationChromo(10000);
@@ -280,10 +280,6 @@ public class GA {
 	}
 
 	public static void main(String[] args) {
-
-		GA ga = new GA();
-		ga.GAlgorithm();
-		System.out.println(Constants.MUTATION_CHANCE);
-
+		GA.GAlgorithm();
 	}
 }

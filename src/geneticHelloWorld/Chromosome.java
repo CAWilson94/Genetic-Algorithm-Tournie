@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class Chromosome {
 
-	GA ga = new GA();
 	public int fitness = 0;
 	public String chromoStr = null;
 
@@ -56,7 +55,7 @@ public class Chromosome {
 	 */
 	public void setFitness() {
 		GA ga = new GA();
-		this.fitness = ga.individualFitness(this.getChromoStr(), Constants.TARGET);
+		this.fitness = GA.individualFitness(this.getChromoStr(), Constants.TARGET);
 	}
 
 	/**

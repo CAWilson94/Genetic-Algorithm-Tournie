@@ -2,13 +2,20 @@ package geneticHelloWorld;
 
 public class FitnessFunctions {
 
+	/**
+	 * Calculate fitness based on hamming distance
+	 * 
+	 * @param individual
+	 * @param target
+	 * @return
+	 */
 	public int fitnessHamming(String individual, String target) {
 
 		int hammingFitness = 0;
 
 		char[] indi = individual.toCharArray();
 		char[] targ = target.toCharArray();
-		
+
 		for (int i = 0; i < indi.length; i++) {
 
 			if (targ[i] != indi[i]) {
@@ -18,6 +25,13 @@ public class FitnessFunctions {
 		return hammingFitness;
 	}
 
+	/**
+	 * Calculate fitness based on distance for each letter
+	 * 
+	 * @param individual
+	 * @param target
+	 * @return
+	 */
 	public int fitnessFunction(String individual, String target) {
 
 		int fitness = 0;
