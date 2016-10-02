@@ -260,15 +260,19 @@ public final class GA {
 
 	public static Boolean levelOff(List<Chromosome> best) {
 		Boolean level = false;
+		int bestNum = 0;
 		for (int i = 1; i < best.size(); i++) {
 			FitnessFunctions f = new FitnessFunctions();
 			int one = f.fitnessFunction(best.get(0).getChromoStr(), Constants.TARGET);
 			int two = f.fitnessFunction(best.get(i).getChromoStr(), Constants.TARGET);
 			int temp = Math.abs(one - two);
-			if (temp < 3) {
-				System.out.println("\nthey are becoming the same :(\n");
-				level = true;
+			if (temp == 0) {
+				bestNum = +1;
 			}
+		}
+		if (bestNum == best.size()) {
+			level = true;
+			return level;
 		}
 		return level;
 	}
@@ -287,6 +291,11 @@ public final class GA {
 			gen++;
 			// Sort the fitness of all
 			sortbyFitness(population);
+			// Keep best recent at size 5
+			if (best.size() > 5) {
+				best.remove(best.get(best.size() - 1));
+			}
+			// Add current to best array
 			best.add(population.get(0));
 			// Check if you have found hello world yet
 			if (population.get(0).getFitness() == 0 || gen == Constants.MAX_GENERATION) {
