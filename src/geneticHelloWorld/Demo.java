@@ -1,5 +1,9 @@
 package geneticHelloWorld;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +27,7 @@ import java.util.List;
 
 public class Demo {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		List<Double> time = new ArrayList<Double>();
 		List<Integer> gen = new ArrayList<Integer>();
 		int generation = 0;
@@ -37,10 +41,20 @@ public class Demo {
 		}
 
 		System.out.println("\n");
-		
+
+		File file = new File("Performance.txt");
+		FileWriter fw;
+
+		fw = new FileWriter(file.getAbsoluteFile());
+
+		BufferedWriter bw = new BufferedWriter(fw);
+
 		for (int i = 0; i < time.size(); i++) {
-			System.out.println("time:	" + time.get(i) + "	Gen:	" + gen.get(i));
+			String content = ("time:	" + time.get(i) + "	Gen:	" + gen.get(i));
+			System.out.println(content);
+			bw.write(content);
 		}
+		bw.close();
 
 	}
 
