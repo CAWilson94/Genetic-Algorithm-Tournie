@@ -74,11 +74,11 @@ public class Demo {
 
 		double duration = (endTime - startTime) / 1000000000.0;
 
-		System.out.println("\n Peformance Results: GA\n");
+		System.out.println("\n Peformance Results: Random Restart \n");
 
 		String content = ("time:	" + duration);
 		System.out.println(content);
-		fileWriting(content + "	:	Random Restart\n");
+		fileWriting("\n" + content + "	:	Random Restart\n");
 	}
 
 	public static void randomPerformance() {
@@ -86,13 +86,14 @@ public class Demo {
 		System.out.println("\nRandom function: ");
 
 		long startRand = System.nanoTime();
-		int randGen = GA.random();
+		Chromosome randGen = GA.random();
 		long endRand = System.nanoTime();
 
 		double randDuration = Math.round((endRand - startRand) / 1000000000.0);
 		System.out.println("\n");
 		System.out.println("\n Performance Results: random\n");
-		String content = ("time:	" + randDuration + "	Gen: " + randGen + "   :	" + Constants.POP_SIZE);
+		String content = ("time:	" + randDuration + "	best string: " + randGen.getChromoStr() + "   :	"
+				+ "	with fitness : " + randGen.getFitness() + "	:	" + Constants.POP_SIZE);
 		fileWriting("\n" + content + "	:	random	");
 		System.out.println(content + "\n");
 	}

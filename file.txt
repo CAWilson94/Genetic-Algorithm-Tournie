@@ -362,3 +362,46 @@ time:	0.5823424	Gen:	76	:	10000	:	GA
 time:	0.934076587	Gen:	93	:	10000	:	GA
 time:	0.937911893	Gen:	93	:	10000	:	GA
 time:	1.04324224	Gen:	88	:	10000	:	GA
+
+time:	0.022588586	:	Random Restart
+
+time:	0.009704107	:	Random Restart
+
+time:	0.00780032	:	Random Restart
+
+time:	0.01040256	:	Random Restart
+
+time:	0.00702336	:	Random Restart
+
+time:	0.026532267	:	Random Restart
+
+time:	0.024388694	:	Random Restart
+
+time:	0.013301334	:	Random Restart
+
+time:	0.00301568	:	Random Restart
+
+time:	0.026351786	:	Random Restart
+
+time:	0.011611734	:	Random Restart
+
+time:	0.012489387	:	Random Restart
+
+time:	0.01674624	:	Random Restart
+
+time:	0.01670912	:	Random Restart
+
+time:	0.015422293	:	Random Restart
+
+time:	0.016564906	:	Random Restart
+
+time:	48.0	best string: Hfoen$Xdyic$   :		with fitness : 42	:	10000	:	random	time:	0.834998613	Gen:	101	:	10000	:	GA
+time:	0.732396373	Gen:	78	:	10000	:	GA
+time:	1.056663467	Gen:	87	:	10000	:	GA
+time:	0.592823467	Gen:	75	:	10000	:	GA
+time:	0.862859093	Gen:	77	:	10000	:	GA
+time:	1.029535146	Gen:	85	:	10000	:	GA
+time:	1.079892907	Gen:	97	:	10000	:	GA
+time:	1.02968192	Gen:	84	:	10000	:	GA
+time:	1.45340928	Gen:	93	:	10000	:	GA
+time:	1.49602048	Gen:	83	:	10000	:	GA

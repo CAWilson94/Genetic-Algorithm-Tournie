@@ -343,19 +343,23 @@ public final class GA {
 		}
 	}
 
-	public static int random() {
+	public static Chromosome random() {
 		Population pop = new Population();
 		List<Chromosome> beep = pop.getRandPopulationChromo();
+		List<Chromosome> best = pop.getRandPopulationChromo();
+		Chromosome bestChromo = new Chromosome();
 		int gen = 0;
 		while (true) {
 			gen++;
 			sortbyFitness(beep);
 			System.out.println("generation: " + gen + " best: " + beep.get(0).getChromoStr() + " Fitness: "
 					+ beep.get(0).getFitness());
-
+			best.add(beep.get(0));
 			if (beep.get(0).getFitness() == 0 || gen == Constants.MAX_GENERATION) {
 				System.out.println("found something: " + beep.get(0).getChromoStr());
-				return gen;
+				sortbyFitness(best);
+				bestChromo = best.get(0);
+				return bestChromo;
 			}
 
 			beep = pop.getRandPopulationChromo();
@@ -391,8 +395,6 @@ public final class GA {
 		Chromosome bestSoFar = startChromo;
 		bestSoFar.setFitness();
 
-		System.out.println(bestSoFar.chromoStr);
-
 		while (bestSoFar.getFitness() != 0) {
 			List<Chromosome> neighbours = getNeighbours(bestSoFar);
 			sortbyFitness(neighbours);
@@ -402,7 +404,8 @@ public final class GA {
 			if (neighbours.get(0).getFitness() > bestSoFar.getFitness()) {
 				return bestSoFar;
 			}
-			System.out.println("best so far fitness:" + bestSoFar.getFitness() + " : " + bestSoFar.getChromoStr());
+			// System.out.println("best so far fitness:" +
+			// bestSoFar.getFitness() + " : " + bestSoFar.getChromoStr());
 		}
 		return bestSoFar;
 	}
@@ -416,7 +419,7 @@ public final class GA {
 			Chromosome solution = hillClimbing(startChromo);
 			if (solution.getFitness() == 0) {
 				System.out.println("hurrah");
-				System.out.println("best so far fitness:" + solution.getFitness() + " : " + solution.getChromoStr());
+				System.out.println("best so far fitness	:	" + solution.getFitness() + " : " + solution.getChromoStr());
 				break;
 			}
 			System.out.println("best so far fitness:" + solution.getFitness() + " : " + solution.getChromoStr());
@@ -451,14 +454,6 @@ public final class GA {
 	}
 
 	public static void main(String[] args) {
-//		Chromosome startChromo = new Chromosome();
-//		startChromo.setChromoStr("abd!");
-//		Chromosome bestSoFar = startChromo;
-//		bestSoFar.setFitness();
-//		List<Chromosome> n = GA.getNeighbours(bestSoFar);
-//		GA.showPopulation(n
-//				);
-		
 		GA.randomRestart();
 	}
 }
