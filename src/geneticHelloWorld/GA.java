@@ -124,7 +124,7 @@ public final class GA {
 		Chromosome childTwo = new Chromosome(newChromoStr2, 0);
 		childTwo.setFitness();
 		Random r = new Random();
-		int i = r.nextInt(10 - 0 + 1);
+		double i = r.nextInt(10 - 0 + 1);
 		if (i < Constants.MUTATION_CHANCE) {
 			mutate(childOne);
 			mutate(childTwo);
@@ -330,6 +330,9 @@ public final class GA {
 	}
 
 	public static void hillClimbing() {
+		/**
+		 * basically a heuristic: refer to notes
+		 */
 
 		Chromosome c = new Chromosome();
 		c.randomChromoFromNum();
@@ -337,6 +340,10 @@ public final class GA {
 		List<Chromosome> compare = new ArrayList<Chromosome>();
 		compare.add(c);
 		showPopulation(compare);
+
+		while (true) {
+
+		}
 
 	}
 

@@ -1,6 +1,10 @@
 package geneticHelloWorld;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -25,45 +29,57 @@ import java.util.Scanner;
 
 public class Demo {
 
+	public static void fileWriting(String someString) {
+		try {
+			FileWriter fileWriter = new FileWriter(new File("File.txt"), true);
+			fileWriter.write(someString);
+			fileWriter.close();
+		} catch (IOException e) {
+			System.out.println("yer maw");
+		}
+	}
+
 	public static void GAPerformance(int runSize, int popSize) {
-		
+
 		List<Double> time = new ArrayList<Double>();
 		List<Integer> gen = new ArrayList<Integer>();
-		
+
 		int generation = 0;
-		
+
 		for (int i = 0; i < runSize; i++) {
-			
+
 			long startTime = System.nanoTime();
 			generation = GA.GAlgorithm();
 			long endTime = System.nanoTime();
-			
+
 			gen.add(generation);
 			double duration = (endTime - startTime) / 1000000000.0;
 			time.add(duration);
 		}
-		
+
 		System.out.println("\n Peformance Results: GA\n");
-		
+
 		for (int i = 0; i < time.size(); i++) {
-			String content = ("time:	" + time.get(i) + "	Gen:	" + gen.get(i));
+			String content = ("time:	" + time.get(i) + "	Gen:	" + gen.get(i) + "	:	" + Constants.POP_SIZE);
 			System.out.println(content);
+			fileWriting(content + "	:	GA\n");
 		}
 	}
 
 	public static void randomPerformance() {
-		
+
 		System.out.println("\nRandom function: ");
-		
+
 		long startRand = System.nanoTime();
 		int randGen = GA.random();
 		long endRand = System.nanoTime();
-		
-		double randDuration = (endRand - startRand) / 1000000000.0;
+
+		double randDuration = Math.round((endRand - startRand) / 1000000000.0);
 		System.out.println("\n");
 		System.out.println("\n Performance Results: random\n");
-		String content = ("time:	" + randDuration + "	Gen:	" + randGen);
-		System.out.println(content);
+		String content = ("time:	" + randDuration + "	Gen: " + randGen + "   :	" + Constants.POP_SIZE);
+		fileWriting("\n" + content + "	:	random	");
+		System.out.println(content + "\n");
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -81,7 +97,7 @@ public class Demo {
 				System.out.println("Not a number ya tit");
 			}
 			char input = s.charAt(0);
-			
+
 			switch (input) {
 			case '1':
 				Demo.GAPerformance(10, 1000);
