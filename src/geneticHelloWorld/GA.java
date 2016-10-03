@@ -394,17 +394,14 @@ public final class GA {
 		System.out.println(bestSoFar.chromoStr);
 
 		while (bestSoFar.getFitness() != 0) {
-			System.out.println("best so far fitness: " + bestSoFar.getFitness());
 			List<Chromosome> neighbours = getNeighbours(bestSoFar);
 			sortbyFitness(neighbours);
 			if (neighbours.get(0).getFitness() < bestSoFar.getFitness()) {
 				bestSoFar = neighbours.get(0);
 			}
 			if (neighbours.get(0).getFitness() > bestSoFar.getFitness()) {
-				System.out.println("cant get any better...");
 				return bestSoFar;
 			}
-			System.out.println("hurrah found it!");
 			System.out.println("best so far fitness:" + bestSoFar.getFitness() + " : " + bestSoFar.getChromoStr());
 		}
 		return bestSoFar;
@@ -419,8 +416,10 @@ public final class GA {
 			Chromosome solution = hillClimbing(startChromo);
 			if (solution.getFitness() == 0) {
 				System.out.println("hurrah");
+				System.out.println("best so far fitness:" + solution.getFitness() + " : " + solution.getChromoStr());
 				break;
 			}
+			System.out.println("best so far fitness:" + solution.getFitness() + " : " + solution.getChromoStr());
 			startChromo.randomChromoFromNum();
 		}
 	}
