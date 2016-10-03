@@ -183,6 +183,39 @@ public final class GA {
 		return crossed;
 	}
 
+	/**
+	 * Tournament to generate new generation
+	 * 
+	 * @param population
+	 * @param crossoverPoint
+	 * @return
+	 */
+	public static List<Chromosome> tournie2(List<Chromosome> population) {
+		List<Chromosome> newGenTemp = new ArrayList<Chromosome>();
+		List<Chromosome> newGen = new ArrayList<Chromosome>();
+		// Until new generation has same number of individuals as population
+		while (newGen.size() != population.size()) {
+			// Select random parents: i.e. the best fittest
+			newGenTemp = randomParents(population);
+			// Check against crossover rate, before crossover
+			Random r = new Random();
+			int i = r.nextInt(10 - 0 + 1);
+			if (i < Constants.CROSSOVER_RATE) {
+				List<Chromosome> temp = crossover(newGenTemp.get(0), newGenTemp.get(1));
+				newGen.addAll(temp);
+				newGenTemp.clear();
+			} else {
+				if (i < Constants.MUTATION_CHANCE) {
+					mutate(newGenTemp.get(0));
+					mutate(newGenTemp.get(0));
+				}
+				newGen.addAll(newGenTemp);
+				newGenTemp.clear();
+			}
+		}
+		return newGen;
+	}
+
 	public List<Chromosome> elitist() {
 		return null;
 	}
