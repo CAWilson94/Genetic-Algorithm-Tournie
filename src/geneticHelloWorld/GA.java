@@ -328,13 +328,19 @@ public final class GA {
 			beep = pop.getRandPopulationChromo();
 		}
 	}
-	
-	public static void hillClimbing(){
-		
+
+	public static void hillClimbing() {
+
+		Chromosome c = new Chromosome();
+		c.randomChromoFromNum();
+		// get fitness
+		List<Chromosome> compare = new ArrayList<Chromosome>();
+		compare.add(c);
+		showPopulation(compare);
+
 	}
 
 	public static void main(String[] args) {
-		System.out.println(Constants.CHARLOTTE.length());
-		GA.GAlgorithm();
+		GA.hillClimbing();
 	}
 }
