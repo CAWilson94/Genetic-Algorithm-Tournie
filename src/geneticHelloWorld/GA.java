@@ -330,31 +330,30 @@ public final class GA {
 	}
 
 	public static void hillClimbing() {
-		/**
-		 * basically a heuristic: refer to notes
-		 */
-
 		Chromosome c = new Chromosome();
 		c.randomChromoFromNum();
-		// get fitness
-		List<Chromosome> compare = new ArrayList<Chromosome>();
-		compare.add(c);
-		showPopulation(compare);
-
+		//String chromoStr = "abc";
 		String chromoStr = c.getChromoStr();
 		char[] charArray = chromoStr.toCharArray();
-		for (char cj : charArray) {
-			System.out.println(cj + "is original");
-			char oneUp = (char) (cj + 1);
-			System.out.println(oneUp + "is one up");
-		}
-		while (true) {
+		List<String> list = new ArrayList<String>();
+		List<Chromosome> chromo = new ArrayList<Chromosome>();
 
+		for (int i = 0; i < charArray.length; i++) {
+			charArray[i] += 1;
+			list.add(new String(charArray));
+			String oneUp = new String(charArray);
+			chromo.add(new Chromosome(oneUp, individualFitness(oneUp)));
+			charArray[i] -= 2;
+			String oneDown = new String(charArray);
+			chromo.add(new Chromosome(oneUp, individualFitness(oneDown)));
+			charArray[i] += 1;
 		}
 
+		showPopulation(chromo);
 	}
 
 	public static void main(String[] args) {
 		GA.hillClimbing();
+
 	}
 }
