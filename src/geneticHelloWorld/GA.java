@@ -373,9 +373,9 @@ public final class GA {
 			list.add(new String(charArray));
 			String oneUp = new String(charArray);
 			chromo.add(new Chromosome(oneUp, individualFitness(oneUp)));
-			charArray[i] -= 2;
+			charArray[i] -= 2; // ! - 2 = # may be problem //TODO: help
 			String oneDown = new String(charArray);
-			chromo.add(new Chromosome(oneUp, individualFitness(oneDown)));
+			chromo.add(new Chromosome(oneDown, individualFitness(oneDown)));
 			charArray[i] += 1;
 		}
 
@@ -451,6 +451,14 @@ public final class GA {
 	}
 
 	public static void main(String[] args) {
+//		Chromosome startChromo = new Chromosome();
+//		startChromo.setChromoStr("abd!");
+//		Chromosome bestSoFar = startChromo;
+//		bestSoFar.setFitness();
+//		List<Chromosome> n = GA.getNeighbours(bestSoFar);
+//		GA.showPopulation(n
+//				);
+		
 		GA.randomRestart();
 	}
 }

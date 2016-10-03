@@ -66,6 +66,33 @@ public class Demo {
 		}
 	}
 
+	public static void hillClimbPerformance(int runSize, int popSize) {
+
+		List<Double> time = new ArrayList<Double>();
+		List<Integer> gen = new ArrayList<Integer>();
+
+		int generation = 0;
+
+		for (int i = 0; i < runSize; i++) {
+
+			long startTime = System.nanoTime();
+			generation = GA.GAlgorithm();
+			long endTime = System.nanoTime();
+
+			gen.add(generation);
+			double duration = (endTime - startTime) / 1000000000.0;
+			time.add(duration);
+		}
+
+		System.out.println("\n Peformance Results: GA\n");
+
+		for (int i = 0; i < time.size(); i++) {
+			String content = ("time:	" + time.get(i) + "	Gen:	" + gen.get(i) + "	:	" + Constants.POP_SIZE);
+			System.out.println(content);
+			fileWriting(content + "	:	GA\n");
+		}
+	}
+	
 	public static void randomPerformance() {
 
 		System.out.println("\nRandom function: ");
