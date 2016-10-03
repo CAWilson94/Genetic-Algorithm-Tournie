@@ -66,33 +66,21 @@ public class Demo {
 		}
 	}
 
-	public static void hillClimbPerformance(int runSize, int popSize) {
+	public static void hillClimbPerformance() {
 
-		List<Double> time = new ArrayList<Double>();
-		List<Integer> gen = new ArrayList<Integer>();
+		long startTime = System.nanoTime();
+		GA.randomRestart();
+		long endTime = System.nanoTime();
 
-		int generation = 0;
-
-		for (int i = 0; i < runSize; i++) {
-
-			long startTime = System.nanoTime();
-			generation = GA.GAlgorithm();
-			long endTime = System.nanoTime();
-
-			gen.add(generation);
-			double duration = (endTime - startTime) / 1000000000.0;
-			time.add(duration);
-		}
+		double duration = (endTime - startTime) / 1000000000.0;
 
 		System.out.println("\n Peformance Results: GA\n");
 
-		for (int i = 0; i < time.size(); i++) {
-			String content = ("time:	" + time.get(i) + "	Gen:	" + gen.get(i) + "	:	" + Constants.POP_SIZE);
-			System.out.println(content);
-			fileWriting(content + "	:	GA\n");
-		}
+		String content = ("time:	" + duration);
+		System.out.println(content);
+		fileWriting(content + "	:	Random Restart\n");
 	}
-	
+
 	public static void randomPerformance() {
 
 		System.out.println("\nRandom function: ");
@@ -118,6 +106,8 @@ public class Demo {
 			System.out.println("\nWould you like to test: ");
 			System.out.println("1: GA");
 			System.out.println("2: Random");
+			System.out.println("3: Random Restart (hill climbing)");
+
 			try {
 				s = scan.nextLine();
 			} catch (NumberFormatException e) {
@@ -131,6 +121,9 @@ public class Demo {
 				break;
 			case '2':
 				Demo.randomPerformance();
+				break;
+			case '3':
+				Demo.hillClimbPerformance();
 				break;
 			}
 		}
