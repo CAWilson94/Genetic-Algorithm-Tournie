@@ -328,6 +328,10 @@ public final class GA {
 			beep = pop.getRandPopulationChromo();
 		}
 	}
+	
+	public static void hillClimbing(){
+		
+	}
 
 	public static void main(String[] args) {
 		System.out.println(Constants.CHARLOTTE.length());
