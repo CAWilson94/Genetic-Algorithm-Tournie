@@ -74,8 +74,9 @@ public class Chromosome {
 	}
 
 	/**
+	 * Get random gene
 	 * 
-	 * @return
+	 * @return String random gene
 	 */
 	public String genRandGene() {
 		Random r = new Random();

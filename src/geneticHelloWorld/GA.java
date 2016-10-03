@@ -125,7 +125,7 @@ public final class GA {
 		childTwo.setFitness();
 		Random r = new Random();
 		int i = r.nextInt(10 - 0 + 1);
-		if (i > Constants.MUTATION_CHANCE) {
+		if (i < Constants.MUTATION_CHANCE) {
 			mutate(childOne);
 			mutate(childTwo);
 		}
@@ -252,7 +252,7 @@ public final class GA {
 			int randomNum1 = rand.nextInt(population.size());
 			Chromosome parent1 = population.get(randomNum);
 			Chromosome parent2 = population.get(randomNum1);
-			List<Chromosome> tempChildren = crossover(parent1, parent2, 2);
+			List<Chromosome> tempChildren = crossover(parent1, parent2);
 			children.add(tempChildren.get(0));
 		}
 		return children;
