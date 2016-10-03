@@ -382,10 +382,12 @@ public final class GA {
 		return chromo;
 	}
 
-	public static Chromosome hillClimbing() {
+	public static Chromosome hillClimbing(Chromosome startChromo) {
+		/**
+		 * Once a local optimum has been found, try again starting from a random
+		 * chosen x
+		 */
 
-		Chromosome startChromo = new Chromosome();
-		startChromo.randomChromoFromNum();
 		Chromosome bestSoFar = startChromo;
 		bestSoFar.setFitness();
 
@@ -398,9 +400,29 @@ public final class GA {
 			if (neighbours.get(0).getFitness() < bestSoFar.getFitness()) {
 				bestSoFar = neighbours.get(0);
 			}
+			if (neighbours.get(0).getFitness() > bestSoFar.getFitness()) {
+				System.out.println("cant get any better...");
+				return bestSoFar;
+			}
+			System.out.println("hurrah found it!");
 			System.out.println("best so far fitness:" + bestSoFar.getFitness() + " : " + bestSoFar.getChromoStr());
 		}
 		return bestSoFar;
+	}
+
+	public static void randomRestart() {
+
+		Chromosome startChromo = new Chromosome();
+		startChromo.randomChromoFromNum();
+
+		while (true) {
+			Chromosome solution = hillClimbing(startChromo);
+			if (solution.getFitness() == 0) {
+				System.out.println("hurrah");
+				break;
+			}
+			startChromo.randomChromoFromNum();
+		}
 	}
 
 	public static Chromosome simulatedAnnealing() {
@@ -430,7 +452,6 @@ public final class GA {
 	}
 
 	public static void main(String[] args) {
-		//System.out.println(GA.hillClimbing().getChromoStr());
-		System.out.println(GA.simulatedAnnealing().getChromoStr());
+		GA.randomRestart();
 	}
 }
