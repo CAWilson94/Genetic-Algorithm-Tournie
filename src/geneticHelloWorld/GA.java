@@ -51,7 +51,7 @@ public final class GA {
 	public static int individualFitness(String individual) {
 		int individualFitness = 0;
 		FitnessFunctions fit = new FitnessFunctions();
-		individualFitness = fit.fitnessHamming(individual);
+		individualFitness = fit.fitnessFunction(individual);
 		return individualFitness;
 	}
 
@@ -329,10 +329,10 @@ public final class GA {
 		}
 	}
 
-	public static void hillClimbing() {
-		Chromosome c = new Chromosome();
+	public static List<Chromosome> getNeighbours(Chromosome c) {
+
 		c.randomChromoFromNum();
-		//String chromoStr = "abc";
+		// String chromoStr = "abc";
 		String chromoStr = c.getChromoStr();
 		char[] charArray = chromoStr.toCharArray();
 		List<String> list = new ArrayList<String>();
@@ -349,7 +349,12 @@ public final class GA {
 			charArray[i] += 1;
 		}
 
-		showPopulation(chromo);
+		return chromo;
+	}
+
+	public static void hillClimbing() {
+		Chromosome c = new Chromosome();
+		getNeighbours(c);
 	}
 
 	public static void main(String[] args) {

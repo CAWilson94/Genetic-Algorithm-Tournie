@@ -39,8 +39,8 @@ public class FitnessFunctions {
 		char[] targ = Constants.TARGET.toCharArray();
 
 		for (int i = 0; i < indi.length; i++) {
-			int indiInt = Math.abs((Character.getNumericValue(indi[i])));
-			int targInt = Math.abs((Character.getNumericValue(targ[i])));
+			int indiInt = (int) (indi[i]);
+			int targInt = (int) (targ[i]);
 			int currentFitness = Math.abs(indiInt - targInt);
 			fitness += currentFitness;
 		}
