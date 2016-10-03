@@ -341,6 +341,13 @@ public final class GA {
 		compare.add(c);
 		showPopulation(compare);
 
+		String chromoStr = c.getChromoStr();
+		char[] charArray = chromoStr.toCharArray();
+		for (char cj : charArray) {
+			System.out.println(cj + "is original");
+			char oneUp = (char) (cj + 1);
+			System.out.println(oneUp + "is one up");
+		}
 		while (true) {
 
 		}
