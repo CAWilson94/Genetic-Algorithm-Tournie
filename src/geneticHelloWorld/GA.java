@@ -364,10 +364,7 @@ public final class GA {
 
 	public static List<Chromosome> getNeighbours(Chromosome c) {
 
-		c.randomChromoFromNum();
-		// String chromoStr = "abc";
-		String chromoStr = c.getChromoStr();
-		char[] charArray = chromoStr.toCharArray();
+		char[] charArray = c.getChromoStr().toCharArray();
 		List<String> list = new ArrayList<String>();
 		List<Chromosome> chromo = new ArrayList<Chromosome>();
 
@@ -385,13 +382,55 @@ public final class GA {
 		return chromo;
 	}
 
-	public static void hillClimbing() {
-		Chromosome c = new Chromosome();
-		getNeighbours(c);
+	public static Chromosome hillClimbing() {
+
+		Chromosome startChromo = new Chromosome();
+		startChromo.randomChromoFromNum();
+		Chromosome bestSoFar = startChromo;
+		bestSoFar.setFitness();
+
+		System.out.println(bestSoFar.chromoStr);
+
+		while (bestSoFar.getFitness() != 0) {
+			System.out.println("best so far fitness: " + bestSoFar.getFitness());
+			List<Chromosome> neighbours = getNeighbours(bestSoFar);
+			sortbyFitness(neighbours);
+			if (neighbours.get(0).getFitness() < bestSoFar.getFitness()) {
+				bestSoFar = neighbours.get(0);
+			}
+			System.out.println("best so far fitness:" + bestSoFar.getFitness() + " : " + bestSoFar.getChromoStr());
+		}
+		return bestSoFar;
+	}
+
+	public static Chromosome simulatedAnnealing() {
+		Chromosome startChromo = new Chromosome();
+		startChromo.randomChromoFromNum();
+		Chromosome bestSoFar = startChromo;
+		System.out.println(bestSoFar.getChromoStr());
+		bestSoFar.setFitness();
+
+		while (bestSoFar.getFitness() != 0) {
+			Random r = new Random();
+			System.out.println("best so far fitness: " + bestSoFar.getFitness());
+			List<Chromosome> neighbours = getNeighbours(bestSoFar);
+			Chromosome neighbourPick = neighbours.get(r.nextInt(neighbours.size()));
+			if (neighbourPick.getFitness() < bestSoFar.getFitness()) {
+				bestSoFar = neighbourPick;
+			}
+			// else{
+			// Random rand = new Random();
+			// int rn = rand.nextInt((10 - 0 + 1));
+			// if(rn>Constants.CROSSOVER_RATE){
+			//
+			// }
+		}
+		System.out.println("best so far fitness:" + bestSoFar.getFitness() + " : " + bestSoFar.getChromoStr());
+		return bestSoFar;
 	}
 
 	public static void main(String[] args) {
-		GA.hillClimbing();
-
+		//System.out.println(GA.hillClimbing().getChromoStr());
+		System.out.println(GA.simulatedAnnealing().getChromoStr());
 	}
 }

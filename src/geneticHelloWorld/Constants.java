@@ -2,7 +2,7 @@ package geneticHelloWorld;
 
 public class Constants {
 
-	public static final String TARGET = "Hello World!";
+	public static final String TARGET = "Hello";
 	public static final int CROSSOVER_RATE = 7; // Trust the crossover rate
 	public static final double MUTATION_CHANCE = 0.1;
 	public static final Chromosome TARGET_CHROMOSOME = new Chromosome(TARGET, 0);
