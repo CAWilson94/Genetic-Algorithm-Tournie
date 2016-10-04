@@ -118,7 +118,7 @@ public class Demo {
 
 			switch (input) {
 			case '1':
-				Demo.GAPerformance(10, 1000);
+				Demo.GAPerformance(1, 1000);
 				break;
 			case '2':
 				Demo.randomPerformance();

@@ -405,3 +405,8 @@ time:	1.079892907	Gen:	97	:	10000	:	GA
 time:	1.02968192	Gen:	84	:	10000	:	GA
 time:	1.45340928	Gen:	93	:	10000	:	GA
 time:	1.49602048	Gen:	83	:	10000	:	GA
+
+time:	0.011395413	:	Random Restart
+time:	1.0076928	Gen:	96	:	10000	:	GA
+
+time:	0.005037653	:	Random Restart
