@@ -48,19 +48,19 @@ public class Demo {
 
 		for (int i = 0; i < runSize; i++) {
 
-			long startTime = System.nanoTime();
+			long startTime = System.currentTimeMillis();
 			generation = GA.GAlgorithm();
-			long endTime = System.nanoTime();
+			long endTime = System.currentTimeMillis();
 
 			gen.add(generation);
-			double duration = (endTime - startTime) / 1000000000.0;
+			double duration = (endTime - startTime);// seconds
 			time.add(duration);
 		}
 
 		System.out.println("\n Peformance Results: GA\n");
 
 		for (int i = 0; i < time.size(); i++) {
-			String content = ("time:	" + time.get(i) + "	Gen:	" + gen.get(i) + "	:	" + Constants.POP_SIZE);
+			String content = ("time:	" + time.get(i) + "ms " + "Gen:	" + gen.get(i) + "	:	" + Constants.POP_SIZE);
 			System.out.println(content);
 			fileWriting(content + "	:	GA\n");
 		}
@@ -68,15 +68,15 @@ public class Demo {
 
 	public static void hillClimbPerformance() {
 
-		long startTime = System.nanoTime();
+		long startTime = System.currentTimeMillis();
 		GA.randomRestart();
-		long endTime = System.nanoTime();
+		long endTime = System.currentTimeMillis();
 
-		double duration = (endTime - startTime) / 1000000000.0;
+		long duration = (endTime - startTime);
 
 		System.out.println("\n Peformance Results: Random Restart \n");
 
-		String content = ("time:	" + duration);
+		String content = ("time:	" + duration  +"ms");
 		System.out.println(content);
 		fileWriting("\n" + content + "	:	Random Restart\n");
 	}
@@ -85,14 +85,14 @@ public class Demo {
 
 		System.out.println("\nRandom function: ");
 
-		long startRand = System.nanoTime();
+		long startRand = System.currentTimeMillis();
 		Chromosome randGen = GA.random();
-		long endRand = System.nanoTime();
+		long endRand = System.currentTimeMillis();
 
-		double randDuration = Math.round((endRand - startRand) / 1000000000.0);
+		double randDuration = Math.round((endRand - startRand) / 1000);
 		System.out.println("\n");
 		System.out.println("\n Performance Results: random\n");
-		String content = ("time:	" + randDuration + "	best string: " + randGen.getChromoStr() + "   :	"
+		String content = ("time:	" + randDuration + "ms " + 	"best string: " + randGen.getChromoStr() + "   :	"
 				+ "	with fitness : " + randGen.getFitness() + "	:	" + Constants.POP_SIZE);
 		fileWriting("\n" + content + "	:	random	");
 		System.out.println(content + "\n");
@@ -118,7 +118,7 @@ public class Demo {
 
 			switch (input) {
 			case '1':
-				Demo.GAPerformance(1, 1000);
+				Demo.GAPerformance(10, 1000);
 				break;
 			case '2':
 				Demo.randomPerformance();

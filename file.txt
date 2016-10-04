@@ -410,3 +410,72 @@ time:	0.011395413	:	Random Restart
 time:	1.0076928	Gen:	96	:	10000	:	GA
 
 time:	0.005037653	:	Random Restart
+time:	1.034064213	Gen:	94	:	10000	:	GA
+
+time:	0.004985174	:	Random Restart
+
+time:	45.0	best string: :krvr&YwomY!   :		with fitness : 70	:	10000	:	random	
+time:	0.0	:	Random Restart
+time:	1.0	Gen:	96	:	10000	:	GA
+
+time:	4.0	:	Random Restart
+
+time:	15	:	Random Restart
+time:	0.0	Gen:	68	:	10000	:	GA
+time:	967.0msGen:	86	:	10000	:	GA
+time:	919.0ms Gen:	86	:	10000	:	GA
+time:	926.0ms Gen:	91	:	10000	:	GA
+time:	679.0ms Gen:	93	:	10000	:	GA
+time:	685.0ms Gen:	94	:	10000	:	GA
+time:	804.0ms Gen:	97	:	10000	:	GA
+time:	981.0ms Gen:	77	:	10000	:	GA
+time:	660.0ms Gen:	90	:	10000	:	GA
+time:	543.0ms Gen:	81	:	10000	:	GA
+time:	674.0ms Gen:	91	:	10000	:	GA
+time:	613.0ms Gen:	91	:	10000	:	GA
+time:	524.0ms Gen:	76	:	10000	:	GA
+
+time:	4	:	Random Restart
+
+time:	12ms	:	Random Restart
+
+time:	3ms	:	Random Restart
+
+time:	4ms	:	Random Restart
+
+time:	5ms	:	Random Restart
+
+time:	3ms	:	Random Restart
+
+time:	36.0ms best string: Inolc Zuskd<   :		with fitness : 63	:	10000	:	random	
+time:	1ms	:	Random Restart
+time:	211.0ms Gen:	119	:	1000	:	GA
+time:	190.0ms Gen:	141	:	1000	:	GA
+time:	87.0ms Gen:	132	:	1000	:	GA
+time:	99.0ms Gen:	157	:	1000	:	GA
+time:	108.0ms Gen:	167	:	1000	:	GA
+time:	96.0ms Gen:	132	:	1000	:	GA
+time:	90.0ms Gen:	164	:	1000	:	GA
+time:	79.0ms Gen:	129	:	1000	:	GA
+time:	120.0ms Gen:	164	:	1000	:	GA
+time:	88.0ms Gen:	145	:	1000	:	GA
+time:	169.0ms Gen:	808	:	100	:	GA
+time:	49.0ms Gen:	507	:	100	:	GA
+time:	80.0ms Gen:	419	:	100	:	GA
+time:	76.0ms Gen:	688	:	100	:	GA
+time:	33.0ms Gen:	425	:	100	:	GA
+time:	32.0ms Gen:	417	:	100	:	GA
+time:	61.0ms Gen:	591	:	100	:	GA
+time:	28.0ms Gen:	427	:	100	:	GA
+time:	24.0ms Gen:	355	:	100	:	GA
+time:	112.0ms Gen:	687	:	100	:	GA
+time:	224.0ms Gen:	638	:	100	:	GA
+time:	61.0ms Gen:	297	:	100	:	GA
+time:	85.0ms Gen:	761	:	100	:	GA
+time:	66.0ms Gen:	574	:	100	:	GA
+time:	70.0ms Gen:	753	:	100	:	GA
+time:	50.0ms Gen:	625	:	100	:	GA
+time:	36.0ms Gen:	605	:	100	:	GA
+time:	32.0ms Gen:	568	:	100	:	GA
+time:	25.0ms Gen:	476	:	100	:	GA
+time:	71.0ms Gen:	486	:	100	:	GA
