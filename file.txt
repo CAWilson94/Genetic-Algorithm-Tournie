@@ -479,3 +479,45 @@ time:	36.0ms Gen:	605	:	100	:	GA
 time:	32.0ms Gen:	568	:	100	:	GA
 time:	25.0ms Gen:	476	:	100	:	GA
 time:	71.0ms Gen:	486	:	100	:	GA
+time:	180.0ms Gen:	560	:	100	:	GA
+time:	38.0ms Gen:	321	:	100	:	GA
+time:	73.0ms Gen:	422	:	100	:	GA
+time:	28.0ms Gen:	335	:	100	:	GA
+time:	48.0ms Gen:	382	:	100	:	GA
+time:	71.0ms Gen:	653	:	100	:	GA
+time:	70.0ms Gen:	785	:	100	:	GA
+time:	34.0ms Gen:	413	:	100	:	GA
+time:	57.0ms Gen:	394	:	100	:	GA
+time:	95.0ms Gen:	663	:	100	:	GA
+
+time:	8ms	:	Random Restart
+
+time:	3ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	3ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	2ms	:	Random Restart
+
+time:	3ms	:	Random Restart
+
+time:	2ms	:	Random Restart
